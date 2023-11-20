@@ -1,4 +1,10 @@
+import { Metadata } from "next";
 import background_hero from "./assets/image/background/asad-photo-maldives.png";
+
+export const metadata: Metadata = {
+  title: "Open Trip",
+  description: "open trip",
+};
 
 export default function Home() {
   console.log(background_hero);
