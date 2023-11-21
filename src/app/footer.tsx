@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import icon_brand from "@/app/assets/image/icon/brand.svg";
 import icon_playstore from "@/app/assets/image/icon/Google Play Badge.svg";
-import icon_appstore from "@/app/assets/image/icon/Google Play Badge.svg";
+import icon_appstore from "@/app/assets/image/icon/App Store Badge.svg";
 
 export default function Footer() {
   return (
@@ -10,7 +10,13 @@ export default function Footer() {
       <div className="container">
         <div className="pt-[100px] pb-[133px] grid gap-[50px] text-[#333] lg:flex md:grid-cols-2">
           <div className="brand md:col-span-2 row-span-1 lg:col-auto lg:row-auto mr-[calc(99px-50px)]">
-            <Image src={icon_brand} alt="" width={216.011} height={30.329} />
+            <Image
+              src={icon_brand}
+              alt=""
+              width={216.011}
+              height={30.329}
+              priority
+            />
           </div>
           <div className="company whitespace-nowrap">
             <h3 className="text-xl font-medium mb-8">Company</h3>
