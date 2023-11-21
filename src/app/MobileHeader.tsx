@@ -8,7 +8,13 @@ export default function MobileHeader() {
       className="flex lg:hidden justify-between h-[72px] items-center"
       id="mobile">
       <div className="left">
-        <Image src={icon_brand} alt="brand" width={156.689} height={22} />
+        <Image
+          src={icon_brand}
+          alt="brand"
+          width={156.689}
+          height={22}
+          priority
+        />
       </div>
       <div className="right">
         <nav>
@@ -19,6 +25,7 @@ export default function MobileHeader() {
               width={40}
               height={40}
               className="[transform:rotateY(180deg)]"
+              priority
             />
           </button>
         </nav>
