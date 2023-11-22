@@ -10,6 +10,7 @@ export default function Footer() {
       <div className="container">
         <div className="pt-[100px] pb-[133px] grid gap-[50px] text-[#333] lg:flex md:grid-cols-2">
           <div className="brand md:col-span-2 row-span-1 lg:col-auto lg:row-auto mr-[calc(99px-50px)]">
+
             <Image
               src={icon_brand}
               alt=""

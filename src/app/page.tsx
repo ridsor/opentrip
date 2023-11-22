@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import background_hero from "./assets/image/background/asad-photo-maldives.png";
+
 import DestinationSearch from "@/components/DestionationSearch";
 import "./style.css";
 import DestinationList from "./DestinationList";
@@ -14,11 +15,13 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  console.log(background_hero);
   return (
     <main>
       <section
         style={{ backgroundImage: `url(${background_hero.src})` }}
         className="h-[449.369px] w-full bg-blend-multiply bg-[#c4c4c4] bg-cover bg-center">
+
         <div className="container h-full">
           <div className="flex items-center h-full w-full mx-auto max-w-[calc(1440px-(205px+205px))] relative">
             <h1 className="font-bold text-3xl lg:text-[45px] text-white leading-snug">
@@ -27,6 +30,7 @@ export default function Home() {
               EXPLORING THE WORLD
             </h1>
             <div className="absolute [box-shadow:0_4px_40px_0_rgba(0,0,0,0.1)] w-full lg:-bottom-[70px] bottom-[-200px] bg-white">
+
               <DestinationSearch>
                 <div className="flex items-center h-full w-full flex-col lg:flex-row py-6 px-6 gap-5 lg:gap-0">
                   <div className="form-input lg:ml-[calc(50px-24px)] lg:border-r lg:border-[#e3e3e3] lg:pr-6 w-full">
@@ -64,12 +68,14 @@ export default function Home() {
                   </button>
                 </div>
               </DestinationSearch>
+
             </div>
           </div>
         </div>
       </section>
       <section>
         <div className="container">
+
           <div className="mt-[223px]">
             <DestinationList
               name="Destinasi Populer"
@@ -113,6 +119,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
+
         </div>
       </section>
     </main>
