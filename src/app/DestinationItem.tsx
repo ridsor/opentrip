@@ -3,7 +3,8 @@ import star from "@/app/assets/image/icon/star.svg";
 import Link from "next/link";
 
 interface Props {
-  image?: string;
+  id: number;
+  image: string;
   place_name: string;
   province: string;
   package: string;
@@ -17,7 +18,7 @@ export default function DestinationItem(props: Props) {
     <div className="destionation-item flex flex-col">
       <div className="relative">
         <Image
-          src={props.image || ""}
+          src={props.image}
           alt={props.place_name}
           width={295}
           height={295}

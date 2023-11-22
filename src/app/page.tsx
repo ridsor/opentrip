@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import background_hero from "./assets/image/background/asad-photo-maldives.png";
 import DestinationSearch from "@/components/DestionationSearch";
 import "./style.css";
-import Image from "next/image";
-
-import arrow from "@/app/assets/image/icon/bi_arrow-right.svg";
+import DestinationList from "./DestinationList";
 import Link from "next/link";
-import DestinationItem from "./DestinationItem";
+import icon_playstore from "@/app/assets/image/icon/Google Play Badge.svg";
+import icon_appstore from "@/app/assets/image/icon/App Store Badge.svg";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Open Trip",
@@ -71,64 +71,46 @@ export default function Home() {
       <section>
         <div className="container">
           <div className="mt-[223px]">
-            <div className="populer-destination mb-[100.5px]">
-              <div className="flex justify-between items-center mb-10">
-                <h2 className="text-[35px] font-bold">Destinasi Populer</h2>
-                <Link
-                  href="/"
-                  className="font-medium text-lg text-dark-pink flex gap-[10px] items-center">
-                  <span className="leading-none">LIHAT LIBURAN LAINNYA </span>
-                  <Image
-                    src={arrow}
-                    width={20}
-                    height={20}
-                    alt="arrow"
-                    className="-translate-y-[1px]"
-                  />
-                </Link>
-              </div>
-              <div className="destionation-list">
-                <DestinationItem
-                  package="3D1N"
-                  place_name="Tanjung Benao"
-                  province="Bali"
-                  description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-                  price={2000000}
-                  rating={4.5}
-                />
-                <DestinationItem
-                  package="3D1N"
-                  place_name="Tanjung Benao"
-                  province="Bali"
-                  description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-                  price={2000000}
-                  rating={4.5}
-                />
-                <DestinationItem
-                  package="3D1N"
-                  place_name="Tanjung Benao"
-                  province="Bali"
-                  description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-                  price={2000000}
-                  rating={4.5}
-                />
-                <DestinationItem
-                  package="3D1N"
-                  place_name="Tanjung Benao"
-                  province="Bali"
-                  description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-                  price={2000000}
-                  rating={4.5}
-                />
-                <DestinationItem
-                  package="3D1N"
-                  place_name="Tanjung Benao"
-                  province="Bali"
-                  description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-                  price={2000000}
-                  rating={4.5}
-                />
-              </div>
+            <DestinationList
+              name="Destinasi Populer"
+              destinations={[]}
+              className="mb-[100px]"
+            />
+            <DestinationList
+              name="Vitamin Sea"
+              destinations={[]}
+              className="mb-[100px]"
+            />
+            <DestinationList
+              name="Naik Naik ke Puncak Gunung"
+              destinations={[]}
+              className="mb-[100px]"
+            />
+            <DestinationList
+              name="Menyatu Dengan Alam"
+              destinations={[]}
+              className="mb-[200px]"
+            />
+          </div>
+        </div>
+      </section>
+      <section className="bg-dark-pink text-white">
+        <div className="container w-full">
+          <div className="py-[100px] w-full lg:w-1/2">
+            <h2 className="font-extrabold  text-5xl mb-4">Download App</h2>
+            <p className="text-lg mb-12">
+              Download the app to manage your projects, keep track of the
+              progress and complete tasks without procastinating. Stay on track
+              and complete on time!
+            </p>
+            <h3 className="text-lg font-medium mb-2">Get the App</h3>
+            <div className="app flex gap-3">
+              <Link href="/">
+                <Image src={icon_playstore} width={135} height={40} alt="" />
+              </Link>
+              <Link href="/">
+                <Image src={icon_appstore} width={135} height={40} alt="" />
+              </Link>
             </div>
           </div>
         </div>
