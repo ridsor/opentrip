@@ -3,6 +3,9 @@ import Link from "next/link";
 import icon_brand from "@/app/assets/image/icon/brand.svg";
 import icon_playstore from "@/app/assets/image/icon/Google Play Badge.svg";
 import icon_appstore from "@/app/assets/image/icon/App Store Badge.svg";
+import icon_socialmedia1 from "@/app/assets/image/icon/Social Icons.svg";
+import icon_socialmedia2 from "@/app/assets/image/icon/Social Icons-1.svg";
+import icon_socialmedia3 from "@/app/assets/image/icon/Social Icons-2.svg";
 
 export default function Footer() {
   return (
@@ -10,7 +13,6 @@ export default function Footer() {
       <div className="container">
         <div className="pt-[100px] pb-[133px] grid gap-[50px] text-[#333] lg:flex md:grid-cols-2">
           <div className="brand md:col-span-2 row-span-1 lg:col-auto lg:row-auto mr-[calc(99px-50px)]">
-
             <Image
               src={icon_brand}
               alt=""
@@ -105,6 +107,46 @@ export default function Footer() {
               </Link>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="py-6 bg-[#0b0d17] text-white">
+        <div className="container flex justify-center md:justify-between flex-wrap gap-6">
+          <span>&copy; 2020 OPENTRIP. All rights reserved</span>
+          <ul className="social-media flex gap-4">
+            <li>
+              <Link href="">
+                <Image
+                  src={icon_socialmedia1}
+                  alt=""
+                  width={24}
+                  height={24}
+                  priority
+                />
+              </Link>
+            </li>
+            <li>
+              <Link href="">
+                <Image
+                  src={icon_socialmedia2}
+                  alt=""
+                  width={24}
+                  height={24}
+                  priority
+                />
+              </Link>
+            </li>
+            <li>
+              <Link href="">
+                <Image
+                  src={icon_socialmedia3}
+                  alt=""
+                  width={24}
+                  height={24}
+                  priority
+                />
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

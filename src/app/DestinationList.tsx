@@ -23,11 +23,12 @@ interface Props {
 export default function DestinationList(props: Props) {
   return (
     <div className={props.className || ""}>
-      <div className="flex justify-between items-center mb-10">
-        <h2 className="text-[35px] font-bold">{props.name}</h2>
+      <div className="flex justify-between items-center mb-10 flex-wrap gap-2">
+        <h2 className="text-3xl md:text-[35px] font-bold">{props.name}</h2>
         <Link
           href="/"
-          className="font-medium text-lg text-dark-pink flex gap-[10px] items-center">
+          className="font-medium text-lg text-dark-pink flex gap-[10px] items-center"
+        >
           <span className="leading-none">LIHAT LIBURAN LAINNYA </span>
           <Image
             src={arrow}
@@ -52,6 +53,17 @@ export default function DestinationList(props: Props) {
             rating={4.5}
           />
         ))}
+        <DestinationItem
+          key={1}
+          id={1}
+          image=""
+          package="3D1N"
+          place_name="Tanjung Benao"
+          province="Bali"
+          description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
+          price={2000000}
+          rating={4.5}
+        />
         <DestinationItem
           key={1}
           id={1}
