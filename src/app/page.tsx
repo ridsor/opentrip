@@ -20,10 +20,10 @@ export default function Home() {
     <main>
       <section
         style={{ backgroundImage: `url(${background_hero.src})` }}
-        className="h-[449.369px] w-full bg-blend-multiply bg-[#c4c4c4] bg-cover bg-center"
+        className="h-[calc(449.369px+72px)] pt-[72px] w-full bg-blend-multiply bg-[#c4c4c4] bg-no-repeat bg-[50%_72px]"
       >
         <div className="container h-full">
-          <div className="flex items-center h-full w-full mx-auto max-w-[calc(1440px-(205px+205px))] relative">
+          <div className="flex h-full w-full mx-auto max-w-[calc(1440px-(205px+205px))] items-center relative">
             <h1 className="font-bold text-3xl lg:text-[45px] text-white leading-snug">
               NEVER STOP
               <br />
