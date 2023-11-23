@@ -6,16 +6,28 @@ import MobileHeader from "./MobileHeader";
 import DestinationSearch from "@/components/DestionationSearch";
 
 export default function Header() {
-  const [isSearch, setSearch] = useState<boolean>(true);
+  const [isSearch, setSearch] = useState<boolean>(false);
+  const [isNav, setNav] = useState<boolean>(false);
 
   const openCloseSearch = () => {
+    if (isNav) setNav(false);
     setSearch((prev) => !prev);
+  };
+
+  const openCloseNav = () => {
+    if (isSearch) setSearch(false);
+    setNav((prev) => !prev);
   };
 
   return (
     <header className="relative">
       <div className="container">
-        <MobileHeader />
+        <MobileHeader
+          isSearch={isSearch}
+          openCloseSearch={openCloseSearch}
+          isNav={isNav}
+          openCloseNav={openCloseNav}
+        />
         <DekstopHeader isSearch={isSearch} openCloseSearch={openCloseSearch} />
       </div>
       {isSearch && (
@@ -27,7 +39,8 @@ export default function Header() {
                   <div className="form-input">
                     <label
                       htmlFor="tujuan"
-                      className="text-base font-medium mb-1 block">
+                      className="text-base font-medium mb-1 block"
+                    >
                       Tujuan
                     </label>
                     <input
@@ -42,7 +55,8 @@ export default function Header() {
                   <div className="form-input">
                     <label
                       htmlFor="jadwal"
-                      className="text-base font-medium mb-1 block">
+                      className="text-base font-medium mb-1 block"
+                    >
                       Jadwal
                     </label>
                     <input
@@ -56,7 +70,8 @@ export default function Header() {
                 </div>
                 <button
                   type="submit"
-                  className="bg-dark-pink text-white py-4 lg:py-6 leading-none px-12 lg:px-20 text-xl">
+                  className="bg-dark-pink text-white py-4 lg:py-6 leading-none px-12 lg:px-20 text-xl"
+                >
                   Cari
                 </button>
               </div>
