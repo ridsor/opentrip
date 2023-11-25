@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 const enableHeaderFooter = [
   "/",
-  "/destinasti",
+  "/destinasi",
   "/register",
   "/register/user",
   "/register/hoster",

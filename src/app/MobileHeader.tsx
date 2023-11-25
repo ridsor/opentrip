@@ -31,8 +31,7 @@ export default function MobileHeader(props: Props) {
               height="24"
               viewBox="0 0 18 18"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+              xmlns="http://www.w3.org/2000/svg">
               <g id="akar-icons:search">
                 <g id="Group">
                   <path
@@ -61,8 +60,7 @@ export default function MobileHeader(props: Props) {
               props.isNav
                 ? "opacity-100 pointer-events-auto scale-100 translate-x-0 translate-y-0"
                 : "opacity-0 pointer-events-none scale-0 translate-x-1/2 -translate-y-1/2"
-            } absolute w-full max-w-[200px] top-full right-0 z-50 transition duration-200 ease-out`}
-          >
+            } absolute w-full max-w-[200px] top-full right-0 z-50 transition duration-200 ease-out`}>
             <nav className="w-full bg-white border p-4">
               <ul className="flex flex-col gap-1.5">
                 <li>
@@ -70,36 +68,32 @@ export default function MobileHeader(props: Props) {
                     href="/"
                     className={`${
                       props.pathname === "/" ? "after:w-3" : "after:w-0"
-                    } text-sm font-medium after:content-[''] after:block after:border-b-4 after:border-dark-pink after:absolute relative after:left-[calc(100%+.4rem)] after:top-1/2 after:-translate-y-1/2`}
-                  >
+                    } text-sm font-medium after:content-[''] after:block after:border-b-4 after:border-dark-pink after:absolute relative after:left-[calc(100%+.4rem)] after:top-1/2 after:-translate-y-1/2`}>
                     Beranda
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/"
+                    href="/destinasi"
                     className={`${
-                      props.pathname === "/destinasti"
+                      props.pathname === "/destinasi"
                         ? "after:w-3"
                         : "after:w-0"
-                    } text-sm font-medium after:content-[''] after:block after:border-b-4 after:border-dark-pink after:absolute relative after:left-[calc(100%+.4rem)] after:top-1/2 after:-translate-y-1/2`}
-                  >
+                    } text-sm font-medium after:content-[''] after:block after:border-b-4 after:border-dark-pink after:absolute relative after:left-[calc(100%+.4rem)] after:top-1/2 after:-translate-y-1/2`}>
                     Destinasti
                   </Link>
                 </li>
                 <li className="mt-4">
                   <Link
                     href="/login"
-                    className="font-bold w-fit block text-dark-pink px-5 py-2 bg-[#f1e4ff] rounded-md"
-                  >
+                    className="font-bold w-fit block text-dark-pink px-5 py-2 bg-[#f1e4ff] rounded-md">
                     Login
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/register"
-                    className="font-bold w-fit block text-white bg-dark-pink px-5 py-2 rounded-md"
-                  >
+                    className="font-bold w-fit block text-white bg-dark-pink px-5 py-2 rounded-md">
                     Sign up
                   </Link>
                 </li>

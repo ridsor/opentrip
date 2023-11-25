@@ -18,31 +18,27 @@ export default function DekstopHeader(props: Props) {
               href="/"
               className={`${
                 props.pathname === "/" ? "border-b-4" : "border-b-0"
-              } font-medium py-0.5 block border-dark-pink`}
-            >
+              } font-medium py-0.5 block border-dark-pink`}>
               Beranda
             </Link>
           </li>
           <li className="flex gap-5 items-center">
             <Link
-              href="/"
+              href="/destinasi"
               className={`${
-                props.pathname === "/destinasti" ? "border-b-4" : "border-b-0"
-              } font-medium py-0.5 block border-dark-pink`}
-            >
+                props.pathname === "/destinasi" ? "border-b-4" : "border-b-0"
+              } font-medium py-0.5 block border-dark-pink`}>
               Destinasi
             </Link>
             <button
               className="w-[18px] h-[18px]"
-              onClick={() => props.openCloseSearch()}
-            >
+              onClick={() => props.openCloseSearch()}>
               <svg
                 width="18"
                 height="18"
                 viewBox="0 0 18 18"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+                xmlns="http://www.w3.org/2000/svg">
                 <g id="akar-icons:search">
                   <g id="Group">
                     <path
@@ -66,14 +62,12 @@ export default function DekstopHeader(props: Props) {
         <div className="flex gap-[14px]">
           <Link
             href="/login"
-            className="font-bold text-dark-pink px-5 py-2 bg-[#f1e4ff] rounded-md"
-          >
+            className="font-bold text-dark-pink px-5 py-2 bg-[#f1e4ff] rounded-md">
             Login
           </Link>
           <Link
             href="/register"
-            className="font-bold text-white bg-dark-pink px-5 py-2 rounded-md"
-          >
+            className="font-bold text-white bg-dark-pink px-5 py-2 rounded-md">
             Sign up
           </Link>
         </div>
