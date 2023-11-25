@@ -8,7 +8,13 @@ import Header from "./header";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const enableHeaderFooter = ["/", "destinasi"];
+const enableHeaderFooter = [
+  "/",
+  "/destinasti",
+  "/register",
+  "/register/user",
+  "/register/hoster",
+];
 
 export default function RootLayout({
   children,

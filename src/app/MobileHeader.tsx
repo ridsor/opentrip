@@ -4,6 +4,7 @@ import icon_menu from "@/app/assets/image/icon/fries-menu.png";
 import Link from "next/link";
 
 interface Props {
+  pathname: string;
   isSearch: boolean;
   isNav: boolean;
   openCloseNav: () => void;
@@ -67,7 +68,9 @@ export default function MobileHeader(props: Props) {
                 <li>
                   <Link
                     href="/"
-                    className="text-sm font-medium after:content-[''] after:block after:border-b-4 after:border-dark-pink after:w-3 after:absolute relative after:left-[calc(100%+.4rem)] after:top-1/2 after:-translate-y-1/2"
+                    className={`${
+                      props.pathname === "/" ? "after:w-3" : "after:w-0"
+                    } text-sm font-medium after:content-[''] after:block after:border-b-4 after:border-dark-pink after:absolute relative after:left-[calc(100%+.4rem)] after:top-1/2 after:-translate-y-1/2`}
                   >
                     Beranda
                   </Link>
@@ -75,7 +78,11 @@ export default function MobileHeader(props: Props) {
                 <li>
                   <Link
                     href="/"
-                    className="text-sm font-medium after:content-[''] after:block after:border-b-4 after:border-dark-pink after:w-0 after:absolute relative after:left-[calc(100%+.4rem)] after:top-1/2 after:-translate-y-1/2"
+                    className={`${
+                      props.pathname === "/destinasti"
+                        ? "after:w-3"
+                        : "after:w-0"
+                    } text-sm font-medium after:content-[''] after:block after:border-b-4 after:border-dark-pink after:absolute relative after:left-[calc(100%+.4rem)] after:top-1/2 after:-translate-y-1/2`}
                   >
                     Destinasti
                   </Link>
@@ -90,7 +97,7 @@ export default function MobileHeader(props: Props) {
                 </li>
                 <li>
                   <Link
-                    href="/signup"
+                    href="/register"
                     className="font-bold w-fit block text-white bg-dark-pink px-5 py-2 rounded-md"
                   >
                     Sign up

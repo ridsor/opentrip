@@ -3,6 +3,7 @@ import Image from "next/image";
 import brand from "@/app/assets/image/icon/brand.svg";
 
 interface Props {
+  pathname: string;
   isSearch: boolean;
   openCloseSearch: () => void;
 }
@@ -15,13 +16,20 @@ export default function DekstopHeader(props: Props) {
           <li>
             <Link
               href="/"
-              className="font-medium border-b-4 py-0.5 block border-dark-pink"
+              className={`${
+                props.pathname === "/" ? "border-b-4" : "border-b-0"
+              } font-medium py-0.5 block border-dark-pink`}
             >
               Beranda
             </Link>
           </li>
           <li className="flex gap-5 items-center">
-            <Link href="/" className="font-medium leading-7 block">
+            <Link
+              href="/"
+              className={`${
+                props.pathname === "/destinasti" ? "border-b-4" : "border-b-0"
+              } font-medium py-0.5 block border-dark-pink`}
+            >
               Destinasi
             </Link>
             <button
@@ -63,7 +71,7 @@ export default function DekstopHeader(props: Props) {
             Login
           </Link>
           <Link
-            href="/signup"
+            href="/register"
             className="font-bold text-white bg-dark-pink px-5 py-2 rounded-md"
           >
             Sign up
