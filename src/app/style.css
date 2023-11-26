@@ -10,9 +10,9 @@
 }
 
 .destionation-item {
+  box-shadow: 0px 10px 60px 0px rgba(46, 46, 46, 0.15);
   background: #fff;
   flex-shrink: 0;
   width: 295px;
   height: 580px;
-  box-shadow: 0px 10px 60px 0px rgba(46, 46, 46, 0.15);
 }

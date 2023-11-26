@@ -22,7 +22,7 @@ export default function DestinationItem(props: Props) {
           alt={props.place_name}
           width={295}
           height={295}
-          className="bg-[#C4C4C4] object-cover object-center w-full aspect-square"
+          className="bg-[#C4C4C4] object-cover object-center w-full aspect-square h-auto"
         />
         <div className="absolute text-base font-semibold text-white px-[15px] py-[5px] bottom-0 right-0 bg-[#1d1d1d]">
           <span>{props.package}</span>
@@ -55,7 +55,8 @@ export default function DestinationItem(props: Props) {
         <div className="order self-end">
           <Link
             href="/"
-            className="text-base font-semibold text-white bg-dark-pink py-[15.5px] text-center block">
+            className="text-base font-semibold text-white bg-dark-pink py-[15.5px] text-center block"
+          >
             Pesan Sekarang
           </Link>
         </div>
