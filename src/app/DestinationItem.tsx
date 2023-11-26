@@ -15,14 +15,14 @@ interface Props {
 
 export default function DestinationItem(props: Props) {
   return (
-    <div className="destionation-item flex flex-col">
+    <div className="destionation-item flex flex-col w-full max-w-[295px]">
       <div className="relative">
         <Image
           src={props.image}
           alt={props.place_name}
           width={295}
           height={295}
-          className="bg-[#C4C4C4] object-cover object-center h-[295px]"
+          className="bg-[#C4C4C4] object-cover object-center w-full aspect-square"
         />
         <div className="absolute text-base font-semibold text-white px-[15px] py-[5px] bottom-0 right-0 bg-[#1d1d1d]">
           <span>{props.package}</span>
@@ -39,7 +39,10 @@ export default function DestinationItem(props: Props) {
           <div className="flex justify-between mb-5">
             <div className="price flex items-center gap-1">
               <span className="text-lg font-bold text-dark-pink">
-                Rp {props.price}
+                Rp{" "}
+                {props.price
+                  .toString()
+                  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".")}
               </span>
               <span className="text-[12px] font-medium"> / Orang</span>
             </div>
