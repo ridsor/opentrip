@@ -1,9 +1,22 @@
-import DestinationItem from "../DestinationItem";
+"use client";
+
+import Image from "next/image";
 import DestinationList from "./DestinationList";
+import icon_filter from "@/app/assets/image/icon/fluent_filter.svg";
 import Filter from "./Filter";
 import Paginate from "./Paginate";
+import { useState } from "react";
 
 export default function Destinasi() {
+  const [filters, setFilters] = useState({});
+  const [isFilter, setFilter] = useState<boolean>(false);
+
+  const handleOnChangeFilter = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setFilters((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   return (
     <main>
       <section className="pt-[calc(72px+70px)]">
@@ -16,15 +29,30 @@ export default function Destinasi() {
               <span className="font-semibold text-[10px]">Urutkan</span>
               <select
                 name="urutkan"
-                className="rounded-[4px]  w-[130px] h-[30px] text-[#a6a6a6] text-[10px] border border-[#d9d9d9] bg-white p-[7px]">
-                <option value="" selected>
+                defaultValue={""}
+                className="rounded-[4px]  w-[130px] h-[30px] text-[#a6a6a6] text-[10px] border border-[#d9d9d9] bg-white p-[7px]"
+              >
+                <option value="" disabled>
                   Pilih Urutan
                 </option>
+                <option value="ASC">A - Z</option>
               </select>
+              <button
+                className="lg:hidden"
+                onClick={() => setFilter((prev) => !prev)}
+              >
+                <Image src={icon_filter} alt="" width={24} height={24} />
+              </button>
             </div>
           </div>
-          <div className="flex gap-[60px]">
-            <div className="w-[255px] hidden lg:block">
+          <div className="flex gap-[60px] relative">
+            <div
+              className={`${
+                isFilter
+                  ? "right-[calc(100%-255px)] opacity-100 pointer-events-auto"
+                  : "right-full opacity-0 pointer-events-none"
+              } lg:opacity-100 top-0 transition-all ease-out w-[255px] absolute lg:static z-10 lg:block`}
+            >
               <Filter />
             </div>
             <div className="flex-1">
