@@ -17,8 +17,8 @@ export default function DekstopHeader(props: Props) {
             <Link
               href="/"
               className={`${
-                props.pathname === "/" ? "border-b-4" : "border-b-0"
-              } font-medium py-0.5 block border-dark-pink`}>
+                props.pathname === "/" ? "after:w-full" : "after:w-0"
+              } font-medium py-0.5 block relative after:block after:absolute after:top-full after:transition-all after:right-1/2 after:translate-x-1/2 after:h-[3px] after:bg-dark-pink`}>
               Beranda
             </Link>
           </li>
@@ -26,8 +26,8 @@ export default function DekstopHeader(props: Props) {
             <Link
               href="/destinasi"
               className={`${
-                props.pathname === "/destinasi" ? "border-b-4" : "border-b-0"
-              } font-medium py-0.5 block border-dark-pink`}>
+                props.pathname === "/destinasi" ? "after:w-full" : "after:w-0"
+              } font-medium py-0.5 block relative after:block after:absolute after:top-full after:transition-all after:right-1/2 after:translate-x-1/2 after:h-[3px] after:bg-dark-pink`}>
               Destinasi
             </Link>
             <button
@@ -56,7 +56,14 @@ export default function DekstopHeader(props: Props) {
         </ul>
       </div>
       <div className="center">
-        <Image src={brand} alt="brand" width={156.689} height={22} priority />
+        <Image
+          src={brand}
+          alt="brand"
+          width={156.689}
+          height={22}
+          priority
+          className="w-full h-auto"
+        />
       </div>
       <div className="right">
         <div className="flex gap-[14px]">

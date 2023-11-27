@@ -21,6 +21,7 @@ export default function MobileHeader(props: Props) {
           width={156.689}
           height={22}
           priority
+          className="w-full h-auto"
         />
       </div>
       <div className="right">
@@ -68,7 +69,7 @@ export default function MobileHeader(props: Props) {
                     href="/"
                     className={`${
                       props.pathname === "/" ? "after:w-3" : "after:w-0"
-                    } text-sm font-medium after:content-[''] after:block after:border-b-4 after:border-dark-pink after:absolute relative after:left-[calc(100%+.4rem)] after:top-1/2 after:-translate-y-1/2`}>
+                    } after:transition-all after:rounded-full text-sm font-medium after:content-[''] after:block after:border-b-4 after:border-dark-pink after:absolute relative after:left-[calc(100%+.4rem)] after:top-1/2 after:-translate-y-1/2`}>
                     Beranda
                   </Link>
                 </li>
@@ -79,7 +80,7 @@ export default function MobileHeader(props: Props) {
                       props.pathname === "/destinasi"
                         ? "after:w-3"
                         : "after:w-0"
-                    } text-sm font-medium after:content-[''] after:block after:border-b-4 after:border-dark-pink after:absolute relative after:left-[calc(100%+.4rem)] after:top-1/2 after:-translate-y-1/2`}>
+                    } after:transition-all after:rounded-full text-sm font-medium after:content-[''] after:block after:border-b-4 after:border-dark-pink after:absolute relative after:left-[calc(100%+.4rem)] after:top-1/2 after:-translate-y-1/2`}>
                     Destinasti
                   </Link>
                 </li>

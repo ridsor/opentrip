@@ -54,8 +54,8 @@ export default function DestinationList(props: Props) {
           />
         ))}
         <DestinationItem
-          key={1}
-          id={1}
+          key={2}
+          id={2}
           image=""
           package="3D1N"
           place_name="Tanjung Benao"
@@ -65,8 +65,8 @@ export default function DestinationList(props: Props) {
           rating={4.5}
         />
         <DestinationItem
-          key={1}
-          id={1}
+          key={3}
+          id={3}
           image=""
           package="3D1N"
           place_name="Tanjung Benao"
