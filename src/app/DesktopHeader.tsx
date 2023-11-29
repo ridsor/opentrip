@@ -10,7 +10,7 @@ interface Props {
 
 export default function DekstopHeader(props: Props) {
   return (
-    <article className="justify-between h-[72px] items-center hidden lg:flex">
+    <article className="justify-between h-[72px] items-center hidden lg:flex text-dark-grey">
       <div className="left">
         <ul className="flex gap-8">
           <li>
@@ -18,7 +18,8 @@ export default function DekstopHeader(props: Props) {
               href="/"
               className={`${
                 props.pathname === "/" ? "after:w-full" : "after:w-0"
-              } font-medium py-0.5 block relative after:block after:absolute after:top-full after:transition-all after:right-1/2 after:translate-x-1/2 after:h-[3px] after:bg-dark-pink`}>
+              } font-medium py-0.5 block relative after:block after:absolute after:top-full after:transition-all after:right-1/2 after:translate-x-1/2 after:h-[3px] after:bg-dark-pink`}
+            >
               Beranda
             </Link>
           </li>
@@ -27,18 +28,21 @@ export default function DekstopHeader(props: Props) {
               href="/destinasi"
               className={`${
                 props.pathname === "/destinasi" ? "after:w-full" : "after:w-0"
-              } font-medium py-0.5 block relative after:block after:absolute after:top-full after:transition-all after:right-1/2 after:translate-x-1/2 after:h-[3px] after:bg-dark-pink`}>
+              } font-medium py-0.5 block relative after:block after:absolute after:top-full after:transition-all after:right-1/2 after:translate-x-1/2 after:h-[3px] after:bg-dark-pink`}
+            >
               Destinasi
             </Link>
             <button
               className="w-[18px] h-[18px]"
-              onClick={() => props.openCloseSearch()}>
+              onClick={() => props.openCloseSearch()}
+            >
               <svg
                 width="18"
                 height="18"
                 viewBox="0 0 18 18"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <g id="akar-icons:search">
                   <g id="Group">
                     <path
@@ -69,12 +73,14 @@ export default function DekstopHeader(props: Props) {
         <div className="flex gap-[14px]">
           <Link
             href="/login"
-            className="font-bold text-dark-pink px-5 py-2 bg-[#f1e4ff] rounded-md">
+            className="font-bold text-dark-pink px-5 py-2 bg-[#f1e4ff] rounded-md"
+          >
             Login
           </Link>
           <Link
             href="/register"
-            className="font-bold text-white bg-dark-pink px-5 py-2 rounded-md">
+            className="font-bold text-white bg-dark-pink px-5 py-2 rounded-md"
+          >
             Sign up
           </Link>
         </div>

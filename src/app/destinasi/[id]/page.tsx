@@ -1,66 +1,119 @@
-"use client";
-
-import icon_calendar from "@/app/assets/image/icon/akar-icons_calendar.svg";
-import icon_location from "@/app/assets/image/icon/akar-icons_location.svg";
-import icon_vector from "@/app/assets/image/icon/Vector.svg";
-import Image from "next/image";
-import { useState } from "react";
+import Script from "next/script";
 
 interface Props {
   params: {
     id: number;
   };
 }
-
 export default function DetailDestination(props: Props) {
-  const [location, setLocation] = useState<string>();
-
   return (
-    <main>
-      <section className="pt-[72px]">
-        <div className="container p-0 max-w-none">
-          <div className="flex">
-            <div className="flex-1 bg-red-500"></div>
-            <div className="w-full max-w-[716px] mr-[100px] ml-10">
-              <div className="pt-[60px]">
-                <div className="text-dark-pink border-b border-[#e0e0e0] pb-5 mb-10">
-                  Destinasi <span className="text-[#a9a9a9]">/</span>{" "}
-                  <span>Jawa Timur</span>
-                </div>
-                <h1 className="text-[45px] font-bold mb-[15px]">
-                  Gunung Bromo
-                </h1>
-                <p className="mb-10 text-base text-[#9f9f9f">
-                  Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku
-                </p>
-                <div className="bg-[#f1f1f1] text-lg flex justify-between h-[60px] items-center px-[15px] mb-[30px]">
-                  <span>Saturday, 29 May 2021</span>
-                  <button className="flex text-dark-pink items-center gap-[6px] font-bold leading-none">
-                    <Image src={icon_calendar} alt="" />
-                    <span>Lihat Tanggal Lain</span>
-                  </button>
-                </div>
-                <div className="flex justify-between items-center">
-                  <div className="flex leading-none items-center">
-                    <Image src={icon_location} alt="" />
-                    <span className="ml-[5px] text-base font-medium">
-                      Titik Penjemputan
-                    </span>
-                  </div>
-                  <button className="rounded-lg border border-[#d4d4d4] h-[40px] w-[295px] font-medium text-[12px] flex items-center">
-                    <span className="flex-1 text-left pl-[15px]">
-                      Indomart Point Mall Taman Anggrek
-                    </span>
-                    <div className="px-[15px] ">
-                      <Image src={icon_vector} alt="" />
-                    </div>
-                  </button>
-                </div>
+    <>
+      <article>
+        <div className="pt-[75px] flex flex-col gap-[75px]">
+          <div className="flex gap-x-[88px] gap-y-4 items-start flex-wrap md:flex-nowrap">
+            <div className="bg-dark-pink text-white flex flex-col font-medium pt-3 pb-1 px-[26px] text-center">
+              <span className="text-2xl">Hari</span>
+              <span className="text-[40px]">1</span>
+            </div>
+            <div className="flex gap-5 flex-col font-medium text-lg w-full">
+              <div className="flex gap-x-6 lg:gap-x-[54px]">
+                <span>20.30</span>
+                <span className="w-full max-w-[735px]">
+                  Berkumpul di meeting point
+                </span>
+              </div>
+              <div className="flex gap-x-6 lg:gap-x-[54px]">
+                <span>21.00</span>
+                <span className="w-full max-w-[735px]">
+                  Perjalanan menuju ke Batu
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-x-[88px] gap-y-4 items-start flex-wrap md:flex-nowrap">
+            <div className="bg-dark-pink text-white flex flex-col font-medium pt-3 pb-1 px-[26px] text-center">
+              <span className="text-2xl">Hari</span>
+              <span className="text-[40px]">2</span>
+            </div>
+            <div className="flex gap-5 flex-col font-medium text-lg w-full">
+              <div className="flex gap-x-6 lg:gap-x-[54px]">
+                <span>12.00</span>
+                <span className="w-full max-w-[735px]">
+                  Makan Siang di Lokal Restorant (Biaya Pribadi) di meeting
+                  point
+                </span>
+              </div>
+              <div className="flex gap-x-6 lg:gap-x-[54px]">
+                <span>13:00</span>
+                <span className="w-full max-w-[735px]">
+                  Perjalanan menuju homestay
+                </span>
+              </div>
+              <div className="flex gap-x-6 lg:gap-x-[54px]">
+                <span>13:45</span>
+                <span className="w-full max-w-[735px]">
+                  Tiba di Homestay untuk beristirahat & Free time (Waktu Bebas)
+                </span>
+              </div>
+              <div className="flex gap-x-6 lg:gap-x-[54px]">
+                <span>22:00</span>
+                <span className="w-full max-w-[735px]">
+                  Persiapan perjalanan menuju Bromo
+                </span>
+              </div>
+              <div className="flex gap-x-6 lg:gap-x-[54px]">
+                <span>22:30</span>
+                <span className="w-full max-w-[735px]">
+                  Perjalanan menuju bromo untuk melihat sunrise
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-x-[88px] gap-y-4 items-start flex-wrap lg:flex-nowrap">
+            <div className="bg-dark-pink text-white flex flex-col font-medium pt-3 pb-1 px-[26px] text-center">
+              <span className="text-2xl">Hari</span>
+              <span className="text-[40px]">3</span>
+            </div>
+            <div className="flex gap-5 flex-col font-medium text-lg w-full">
+              <div className="flex gap-x-6 lg:gap-x-[54px]">
+                <span>03:00</span>
+                <span className="w-full max-w-[735px]">
+                  Tiba di Cemoro Lawang, transfer Jeep menuju Pananjakan 1 untuk
+                  melihat Sunrise di Bromo, dilanjutkan menuju ke Lautan Pasir,
+                  menuju ke Pura dan Kawah Bromo (dapat dengan berjalan kaki
+                  atau naik kuda dengan biaya pribadi), menuju ke Savana / Bukit
+                  Teletubbies dan Pasir Berbisik
+                </span>
+              </div>
+              <div className="flex gap-x-6 lg:gap-x-[54px]">
+                <span>09:00</span>
+                <span className="w-full max-w-[735px]">
+                  Perjalanan kembali menuju homestay
+                </span>
+              </div>
+              <div className="flex gap-x-6 lg:gap-x-[54px]">
+                <span>13:45</span>
+                <span className="w-full max-w-[735px]">
+                  Tiba di Homestay untuk beristirahat & Free time (Waktu Bebas)
+                </span>
+              </div>
+              <div className="flex gap-x-6 lg:gap-x-[54px]">
+                <span>22:00</span>
+                <span className="w-full max-w-[735px]">
+                  Persiapan perjalanan menuju Bromo
+                </span>
+              </div>
+              <div className="flex gap-x-6 lg:gap-x-[54px]">
+                <span>22:30</span>
+                <span className="w-full max-w-[735px]">
+                  Perjalanan menuju bromo untuk melihat sunrise
+                </span>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </main>
+      </article>
+      <Script>window.scrollTo(0, 0);</Script>
+    </>
   );
 }
