@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import background_hero from "./assets/image/background/asad-photo-maldives.png";
 import background_phone1 from "./assets/image/background/background_phone1.png";
 import background_phone2 from "./assets/image/background/background_phone2.png";
-import DestinationSearch from "@/components/DestionationSearch";
+import DestinationSearch from "@/components/DestinationSearch/DestionationSearchHeader";
 import "./style.css";
 import DestinationList from "./DestinationList";
 import Link from "next/link";
@@ -20,7 +20,7 @@ export default function Home() {
     <main>
       <section
         style={{ backgroundImage: `url(${background_hero.src})` }}
-        className="h-[calc(449.369px+72px)] pt-[72px] w-full bg-blend-multiply bg-[#c4c4c4] bg-no-repeat bg-[50%_72px]"
+        className="h-[calc(449.369px+72px)] pt-[72px] w-full bg-blend-multiply bg-[#c4c4c4] bg-center bg-cover"
       >
         <div className="container h-full">
           <div className="flex h-full w-full mx-auto max-w-[calc(1440px-(205px+205px))] items-center relative">
@@ -30,7 +30,7 @@ export default function Home() {
               EXPLORING THE WORLD
             </h1>
             <div className="absolute [box-shadow:0_4px_40px_0_rgba(0,0,0,0.1)] w-full lg:-bottom-[70px] bottom-[-200px] bg-white">
-              <DestinationSearch>
+              {/* <DestinationSearch>
                 <div className="flex items-center h-full w-full flex-col lg:flex-row py-6 px-6 gap-5 lg:gap-0">
                   <div className="form-input lg:ml-[calc(50px-24px)] lg:border-r lg:border-[#e3e3e3] lg:pr-6 w-full">
                     <label
@@ -69,7 +69,7 @@ export default function Home() {
                     Cari
                   </button>
                 </div>
-              </DestinationSearch>
+              </DestinationSearch> */}
             </div>
           </div>
         </div>
