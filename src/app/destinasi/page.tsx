@@ -45,13 +45,13 @@ export default function Destinasi() {
               </button>
             </div>
           </div>
-          <div className="flex gap-[60px] relative">
+          <div className="flex gap-[60px] z-10 relative">
             <div
               className={`${
                 isFilter
                   ? "right-[calc(100%-255px)] opacity-100 pointer-events-auto"
                   : "right-full opacity-0 pointer-events-none"
-              } lg:opacity-100 top-0 transition-all ease-out w-[255px] absolute lg:static z-10 lg:block`}
+              } lg:opacity-100 top-0 transition-all ease-out w-[255px] lg:pointer-events-auto absolute lg:static z-10 lg:block`}
             >
               <Filter />
             </div>
