@@ -9,6 +9,7 @@ import Link from "next/link";
 import icon_playstore from "@/app/assets/image/icon/Google Play Badge.svg";
 import icon_appstore from "@/app/assets/image/icon/App Store Badge.svg";
 import Image from "next/image";
+import DestinationSearchHome from "@/components/DestinationSearch/DestinationSearchHome";
 
 export const metadata: Metadata = {
   title: "Open Trip",
@@ -30,46 +31,7 @@ export default function Home() {
               EXPLORING THE WORLD
             </h1>
             <div className="absolute [box-shadow:0_4px_40px_0_rgba(0,0,0,0.1)] w-full lg:-bottom-[70px] bottom-[-200px] bg-white">
-              {/* <DestinationSearch>
-                <div className="flex items-center h-full w-full flex-col lg:flex-row py-6 px-6 gap-5 lg:gap-0">
-                  <div className="form-input lg:ml-[calc(50px-24px)] lg:border-r lg:border-[#e3e3e3] lg:pr-6 w-full">
-                    <label
-                      htmlFor="tujuan"
-                      className="block mb-1 text-base font-medium"
-                    >
-                      Tujuan
-                    </label>
-                    <input
-                      type="text"
-                      className="text-[#ccc] text-xl lg:text-[28px] placeholder:text-[#ccc] outline-none w-full lg:w-[calc(198px+140px-24px)]"
-                      placeholder="Semua Tujuan"
-                      id="tujuan"
-                      name="tujuan"
-                    />
-                  </div>
-                  <div className="lg:ml-[140px] form-input lg:mr-6 w-full">
-                    <label
-                      htmlFor="jadwal"
-                      className="block mb-1 text-base font-medium"
-                    >
-                      Jadwal
-                    </label>
-                    <input
-                      type="text"
-                      className="text-[#ccc] text-xl lg:text-[28px] w-full placeholder:text-[#ccc] outline-none"
-                      placeholder="Kapan Saja"
-                      id="jadwal"
-                      name="jadwal"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="bg-dark-pink text-white py-4 lg:py-6 leading-none px-12 lg:px-20 text-xl"
-                  >
-                    Cari
-                  </button>
-                </div>
-              </DestinationSearch> */}
+              <DestinationSearchHome />
             </div>
           </div>
         </div>

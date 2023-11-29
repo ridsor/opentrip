@@ -57,13 +57,6 @@ export default function DestinationSearch() {
               name="jadwal"
               id="jadwal"
             />
-            {/* <input
-              id="jadwal"
-              name="jadwal"
-              type="text"
-              className="text-[#ccc] placeholder:text-[#ccc] text-xl lg:text-[28px] outline-none w-[148px]"
-              placeholder="Kapan Saja"
-            /> */}
           </div>
         </div>
         <button
