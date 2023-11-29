@@ -16,7 +16,7 @@ interface Props {
 export default function DestinationItem(props: Props) {
   return (
     <div className="destionation-item flex flex-col w-full max-w-[295px]">
-      <div className="relative">
+      <Link href={`/destinasi/1`} className="relative">
         <Image
           src={props.image}
           alt={props.place_name}
@@ -27,12 +27,15 @@ export default function DestinationItem(props: Props) {
         <div className="absolute text-base font-semibold text-white px-[15px] py-[5px] bottom-0 right-0 bg-[#1d1d1d]">
           <span>{props.package}</span>
         </div>
-      </div>
+      </Link>
       <div className="content py-6 px-5 flex-1 grid">
         <div>
-          <h3 className="title font-bold text-[22px] mb-5">
+          <Link
+            href={`/destinasi/1`}
+            className="title font-bold text-[22px] mb-5 block"
+          >
             {props.place_name}, {props.province}
-          </h3>
+          </Link>
           <div className="description text-sm font-medium mb-5">
             <span>{props.description}</span>
           </div>

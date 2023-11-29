@@ -6,3 +6,10 @@ body {
   color: #4a4a4a;
   font-size: 14px;
 }
+
+.react-datepicker__day--selected {
+  @apply !bg-dark-pink;
+}
+.react-datepicker-wrapper input {
+  @apply text-[#ccc] placeholder:text-[#ccc] text-xl lg:text-[28px] outline-none w-[148px];
+}
