@@ -10,12 +10,70 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import Select, { components, Options, SingleValue } from "react-select";
 
 interface Props {
   children: React.ReactNode;
 }
 
+const pickupPointSelect = {
+  components: {
+    DropdownIndicator: (props: any) => (
+      <components.DropdownIndicator {...props}>
+        <Image src={icon_vector} alt="" className="w-[14px] h-[8px]" />
+      </components.DropdownIndicator>
+    ),
+  },
+  styles: {
+    control: (baseStyles: any) => ({
+      ...baseStyles,
+      borderColor: "#d4d4d4",
+      height: "40px",
+      minHeight: "40px",
+    }),
+    input: (provided: any, state: any) => ({
+      ...provided,
+      margin: "0px",
+    }),
+    valueContainer: (provided: any, state: any) => ({
+      ...provided,
+      height: "40px",
+      padding: "0 0 0 10px",
+    }),
+    indicatorSeparator: (state: any) => ({
+      display: "none",
+    }),
+    indicatorsContainer: (provided: any, state: any) => ({
+      ...provided,
+      height: "40px",
+    }),
+  },
+  theme: (theme: any) => ({
+    ...theme,
+    borderRadius: 8,
+    colors: {
+      ...theme.colors,
+      primary25: "#E5E5E5",
+      primary: "#FF385C",
+      primary50: "none",
+    },
+  }),
+};
+
 export default function Layout(props: Props) {
+  const [pickupPointOptions, setPickupPointOptions] = useState([
+    {
+      value: "Indomart Point Mall Taman Anggrek",
+      label: "Indomart Point Mall Taman Anggrek",
+    },
+    {
+      value: "Indomart Point Mall Taman Anggrek S",
+      label: "Indomart Point Mall Taman Anggrek S",
+    },
+  ]);
+  const [selectedPickupPointOption, setSelectedPickupPointOption] =
+    useState<SingleValue<{ value: string; label: string }>>(null);
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.GOOGLE_API_KEY as string,
   });
@@ -69,14 +127,24 @@ export default function Layout(props: Props) {
                       Titik Penjemputan
                     </span>
                   </div>
-                  <button className="rounded-lg border border-[#d4d4d4] h-[40px] w-[295px] font-medium text-[12px] flex items-center">
+                  <Select
+                    defaultValue={pickupPointOptions[0]}
+                    onChange={(selectedPickupPointOption) =>
+                      setSelectedPickupPointOption(selectedPickupPointOption)
+                    }
+                    options={pickupPointOptions}
+                    {...pickupPointSelect}
+                    placeholder="Pilih tempat"
+                    className="w-full max-w-[295px] font-medium text-[12px] relative z-10"
+                  />
+                  {/* <button className="rounded-lg border border-[#d4d4d4] h-[40px] w-[295px] font-medium text-[12px] flex items-center">
                     <span className="flex-1 text-left pl-[15px]">
                       Indomart Point Mall Taman Anggrek
                     </span>
                     <div className="px-[15px] ">
                       <Image src={icon_vector} alt="" />
                     </div>
-                  </button>
+                  </button> */}
                 </div>
                 <div
                   className={`${

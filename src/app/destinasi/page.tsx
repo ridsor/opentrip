@@ -5,10 +5,84 @@ import DestinationList from "./DestinationList";
 import icon_filter from "@/app/assets/image/icon/fluent_filter.svg";
 import Filter from "./Filter";
 import Paginate from "./Paginate";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import Select, { components } from "react-select";
+import "./style.css";
+import { SingleValue } from "react-select/dist/declarations/src";
+
+interface Filter {
+  tanggal_keberangkatan: Date | null;
+}
+
+const sortOptions = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
+
+const sortSelect = {
+  components: {
+    DropdownIndicator: (props: any) => (
+      <components.DropdownIndicator {...props}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="17"
+          height="17"
+          viewBox="0 0 17 17"
+          fill="none"
+        >
+          <path
+            d="M4.07959 6.56366L8.07959 10.5637L12.0796 6.56366"
+            stroke="#4D4D4D"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </components.DropdownIndicator>
+    ),
+  },
+  styles: {
+    control: (baseStyles: any) => ({
+      ...baseStyles,
+      borderColor: "#d9d9d9",
+      height: "30px",
+      minHeight: "30px",
+    }),
+    input: (provided: any, state: any) => ({
+      ...provided,
+      margin: "0px",
+    }),
+    valueContainer: (provided: any, state: any) => ({
+      ...provided,
+      height: "30px",
+      padding: "0 0 0 10px",
+    }),
+    indicatorSeparator: (state: any) => ({
+      display: "none",
+    }),
+    indicatorsContainer: (provided: any, state: any) => ({
+      ...provided,
+      height: "30px",
+    }),
+  },
+  theme: (theme: any) => ({
+    ...theme,
+    borderRadius: 4,
+    colors: {
+      ...theme.colors,
+      primary25: "#E5E5E5",
+      primary: "#FF385C",
+      primary50: "none",
+    },
+  }),
+};
 
 export default function Destinasi() {
-  const [filters, setFilters] = useState({});
+  const [selectedSortOption, setSelectedSortOption] =
+    useState<SingleValue<{ value: string; label: string }>>(null);
+  const [filters, setFilters] = useState<Filter>({
+    tanggal_keberangkatan: null,
+  });
   const [isFilter, setFilter] = useState<boolean>(false);
 
   const handleOnChangeFilter = (
@@ -16,6 +90,9 @@ export default function Destinasi() {
   ) => {
     setFilters((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+  const handleChangeDate = useCallback((date: Date) => {
+    setFilters((prev) => ({ ...prev, tanggal_keberangkatan: date }));
+  }, []);
 
   return (
     <main>
@@ -27,16 +104,16 @@ export default function Destinasi() {
             </h1>
             <div className="flex gap-[10px] items-center mb-6 md:mb-0">
               <span className="font-semibold text-[10px]">Urutkan</span>
-              <select
-                name="urutkan"
-                defaultValue={""}
-                className="rounded-[4px]  w-[130px] h-[30px] text-[#a6a6a6] text-[10px] border border-[#d9d9d9] bg-white p-[7px]"
-              >
-                <option value="" disabled>
-                  Pilih Urutan
-                </option>
-                <option value="ASC">A - Z</option>
-              </select>
+              <Select
+                className="relative z-20 w-[130px] text-[12px]"
+                placeholder="Pilih Urutan"
+                defaultValue={selectedSortOption}
+                onChange={(selectedSortOption) =>
+                  setSelectedSortOption(selectedSortOption)
+                }
+                options={sortOptions}
+                {...sortSelect}
+              />
               <button
                 className="lg:hidden"
                 onClick={() => setFilter((prev) => !prev)}
@@ -53,7 +130,11 @@ export default function Destinasi() {
                   : "right-full opacity-0 pointer-events-none"
               } lg:opacity-100 top-0 transition-all ease-out w-[255px] lg:pointer-events-auto absolute lg:static z-10 lg:block`}
             >
-              <Filter />
+              <Filter
+                filters={filters}
+                onChangeFilter={handleOnChangeFilter}
+                onChangeDate={handleChangeDate}
+              />
             </div>
             <div className="flex-1">
               <DestinationList destination={[]} />
