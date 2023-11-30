@@ -1,9 +1,20 @@
 import icon_filter from "@/app/assets/image/icon/fluent_filter.svg";
-import chevron_down from "@/app/assets/image/icon/chevron-down.svg";
+import chevron_up from "@/app/assets/image/icon/chevron-up.svg";
 import star from "@/app/assets/image/icon/star.svg";
 import Image from "next/image";
+import ReactDatePicker from "react-datepicker";
 
-export default function Filter() {
+interface Props {
+  filters: {
+    tanggal_keberangkatan: Date | null;
+  };
+  onChangeFilter: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
+  onChangeDate: (date: Date) => void;
+}
+
+export default function Filter(props: Props) {
   return (
     <div className="filter bg-white rounded-md">
       <div className="gap-[5px] items-center mb-[30px] hidden lg:flex">
@@ -19,7 +30,7 @@ export default function Filter() {
               Tipe Perjalanan
             </h4>
             <button className="rounded-full bg-[#f5f5f5]">
-              <Image src={chevron_down} alt="" width={20} height={20} />
+              <Image src={chevron_up} alt="" width={20} height={20} />
             </button>
           </div>
           <div className="flex gap-[15px] p-[15px] flex-col">
@@ -49,7 +60,7 @@ export default function Filter() {
               Tema Perjalanan
             </h4>
             <button className="rounded-full bg-[#f5f5f5]">
-              <Image src={chevron_down} alt="" width={20} height={20} />
+              <Image src={chevron_up} alt="" width={20} height={20} />
             </button>
           </div>
           <div className="flex gap-[15px] p-[15px] flex-col">
@@ -97,7 +108,7 @@ export default function Filter() {
               Budget
             </h4>
             <button className="rounded-full bg-[#f5f5f5]">
-              <Image src={chevron_down} alt="" width={20} height={20} />
+              <Image src={chevron_up} alt="" width={20} height={20} />
             </button>
           </div>
           <div className="flex gap-[10px] p-[15px] flex-col">
@@ -137,7 +148,7 @@ export default function Filter() {
               Lokasi Keberangkatan
             </h4>
             <button className="rounded-full bg-[#f5f5f5]">
-              <Image src={chevron_down} alt="" width={20} height={20} />
+              <Image src={chevron_up} alt="" width={20} height={20} />
             </button>
           </div>
           <div className="flex gap-[10px] p-[15px] flex-col">
@@ -186,7 +197,7 @@ export default function Filter() {
           <div className="border-b border-[#e4e4e4] px-[15px] pt-[15px] pb-5 flex items-center justify-between">
             <h4 className="font-bold tracking-[0.2px] text-sm">Destinasi</h4>
             <button className="rounded-full bg-[#f5f5f5]">
-              <Image src={chevron_down} alt="" width={20} height={20} />
+              <Image src={chevron_up} alt="" width={20} height={20} />
             </button>
           </div>
           <div className="flex gap-[10px] p-[15px] flex-col">
@@ -233,11 +244,82 @@ export default function Filter() {
         </div>
         <div>
           <div className="border-b border-[#e4e4e4] px-[15px] pt-[15px] pb-5 flex items-center justify-between">
+            <h4 className="font-bold tracking-[0.2px] text-sm">
+              Periode Berangkat
+            </h4>
+            <button className="rounded-full bg-[#f5f5f5]">
+              <Image src={chevron_up} alt="" width={20} height={20} />
+            </button>
+          </div>
+          <div className="flex gap-[10px] p-[15px] flex-col">
+            <div className="flex items-center border-[#e4e4e4] h-[32px] rounded-md border overflow-hidden">
+              <label
+                htmlFor="tanggal_keberangkatan"
+                className="text-[12px] font-medium  leading-3 bg-[#f3f3f3] pr-[8px] pl-[9px] h-full flex items-center text-[#4d4d4d]"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="15"
+                  viewBox="0 0 15 15"
+                  fill="none"
+                >
+                  <g clip-path="url(#clip0_126_259)">
+                    <path
+                      d="M10.7396 2.83093H3.73958C2.45092 2.83093 1.40625 3.8756 1.40625 5.16427V10.9976C1.40625 12.2863 2.45092 13.3309 3.73958 13.3309H10.7396C12.0282 13.3309 13.0729 12.2863 13.0729 10.9976V5.16427C13.0729 3.8756 12.0282 2.83093 10.7396 2.83093Z"
+                      stroke="#C0C0C0"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M4.90625 1.66425V3.99758"
+                      stroke="#C0C0C0"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M9.57275 1.66425V3.99758"
+                      stroke="#C0C0C0"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M1.40625 6.33093H13.0729"
+                      stroke="#C0C0C0"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_126_259">
+                      <rect
+                        width="14"
+                        height="14"
+                        fill="white"
+                        transform="translate(0.239746 0.497559)"
+                      />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </label>
+              <ReactDatePicker
+                selected={props.filters.tanggal_keberangkatan}
+                onChange={(date: Date) => props.onChangeDate(date)}
+                placeholderText="Pilih tanggal keberangkatan"
+                name="tanggal_keberangkatan"
+                id="tanggal_keberangkatan"
+                className="filter"
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="border-b border-[#e4e4e4] px-[15px] pt-[15px] pb-5 flex items-center justify-between">
             <h4 className="font-bold tracking-[0.2px] text-sm text-[#4d4d4d]">
               Rating
             </h4>
             <button className="rounded-full bg-[#f5f5f5]">
-              <Image src={chevron_down} alt="" width={20} height={20} />
+              <Image src={chevron_up} alt="" width={20} height={20} />
             </button>
           </div>
           <div className="flex gap-[15px] p-[15px] flex-col">
@@ -267,7 +349,7 @@ export default function Filter() {
           <div className="border-b border-[#e4e4e4] px-[15px] pt-[15px] pb-5 flex items-center justify-between">
             <h4 className="font-bold tracking-[0.2px] text-sm">Durasi</h4>
             <button className="rounded-full bg-[#f5f5f5]">
-              <Image src={chevron_down} alt="" width={20} height={20} />
+              <Image src={chevron_up} alt="" width={20} height={20} />
             </button>
           </div>
           <div className="px-[15px] pt-[15px] w-full pb-[43px]">

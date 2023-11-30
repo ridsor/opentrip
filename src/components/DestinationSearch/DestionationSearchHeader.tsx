@@ -3,16 +3,17 @@
 import { useCallback, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./style.css";
 
 interface Input {
   purpose: string;
-  timetable: Date | "Kapan Saja";
+  timetable: Date | null;
 }
 
 export default function DestinationSearch() {
   const [inputs, setInputs] = useState<Input>({
     purpose: "",
-    timetable: "Kapan Saja",
+    timetable: null,
   });
 
   const handleSearch = useCallback((e: React.FormEvent<HTMLFormElement>) => {
@@ -47,23 +48,14 @@ export default function DestinationSearch() {
               Jadwal
             </label>
             <DatePicker
-              selected={
-                inputs.timetable != "Kapan Saja" ? inputs.timetable : null
-              }
-              value={inputs.timetable as string}
+              selected={inputs.timetable}
               onChange={(date: Date) =>
                 setInputs((prev) => ({ ...prev, timetable: date }))
               }
               name="jadwal"
               id="jadwal"
+              className="search_destination"
             />
-            {/* <input
-              id="jadwal"
-              name="jadwal"
-              type="text"
-              className="text-[#ccc] placeholder:text-[#ccc] text-xl lg:text-[28px] outline-none w-[148px]"
-              placeholder="Kapan Saja"
-            /> */}
           </div>
         </div>
         <button
