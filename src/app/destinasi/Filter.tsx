@@ -329,7 +329,7 @@ export default function Filter(props: Props) {
                 htmlFor="peringkat_5"
                 className="text-[12px] font-medium tracking-[0.2px] leading-3 flex gap-[5px] items-center text-[#4d4d4d]"
               >
-                <Image src={star} width={12} height={12} alt="" />
+                <Image src={star} width={12} height={12} alt="" className="w-[12px] h-[12px]" />
                 <span>5 Bintang</span>
               </label>
             </div>
@@ -339,7 +339,7 @@ export default function Filter(props: Props) {
                 htmlFor="peringkat_3_4"
                 className="text-[12px] font-medium tracking-[0.2px] leading-3 flex gap-[5px] items-center text-[#4d4d4d]"
               >
-                <Image src={star} width={12} height={12} alt="" />
+                <Image src={star} width={12} height={12} alt="" className="w-[12px] h-[12px]" />
                 <span>3 - 4 Bintang</span>
               </label>
             </div>

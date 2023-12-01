@@ -101,6 +101,7 @@ export default function Footer() {
                   alt="playstore"
                   width={135}
                   height={40}
+                  className="w-[135px] h-[40px]"
                 />
               </Link>
               <Link href="/">
@@ -109,6 +110,7 @@ export default function Footer() {
                   alt="appstore"
                   width={135}
                   height={40}
+                  className="w-[135px] h-[40px]"
                 />
               </Link>
             </div>

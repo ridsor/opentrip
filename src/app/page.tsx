@@ -108,10 +108,11 @@ export default async function Home() {
                       width={135}
                       height={40}
                       alt=""
+                      className="w-[135px] h-[40px]"
                     />
                   </Link>
                   <Link href="/">
-                    <Image src={icon_appstore} width={135} height={40} alt="" />
+                    <Image src={icon_appstore} width={135} height={40} alt="" className="w-[135px] h-[40px]" />
                   </Link>
                 </div>
               </div>
@@ -135,7 +136,7 @@ export default async function Home() {
                     width={232}
                     height={464}
                     priority
-                    className="w-[232px] h-[464px]"
+                    className="w-[232px] h-[464px] max-w-none"
                   />
                 </div>
               </div>
