@@ -9,13 +9,39 @@ import icon_playstore from "@/app/assets/image/icon/Google Play Badge.svg";
 import icon_appstore from "@/app/assets/image/icon/App Store Badge.svg";
 import Image from "next/image";
 import DestinationSearchHome from "@/components/DestinationSearch/DestinationSearchHome";
+import { getData } from "@/services/destinastion";
 
 export const metadata: Metadata = {
   title: "Open Trip",
   description: "open trip",
 };
 
-export default function Home() {
+interface Destination {
+  id: number;
+  name: string;
+  image: string;
+  province: string;
+  price: number;
+  rating: number;
+  package: string;
+  description: string;
+  travel_theme: string;
+}
+
+export default async function Home() {
+  const popularDestinations = await getData<Destination[]>(
+    "/destination?travel_theme=Destinasi Populer"
+  );
+  const vitaminSeaDestinations = await getData<Destination[]>(
+    "/destination?travel_theme=Destinasi Populer"
+  );
+  const mountainDestinations = await getData<Destination[]>(
+    "/destination?travel_theme=Naik Naik ke Puncak Gunung"
+  );
+  const natureDestinations = await getData<Destination[]>(
+    "/destination?travel_theme=Menyatu Dengan Alam"
+  );
+
   return (
     <main>
       <section
@@ -40,22 +66,22 @@ export default function Home() {
           <div className="mt-[323px] lg:mt-[223px]">
             <DestinationList
               name="Destinasi Populer"
-              destinations={[]}
+              destinations={popularDestinations}
               className="mb-[100px]"
             />
             <DestinationList
               name="Vitamin Sea"
-              destinations={[]}
+              destinations={vitaminSeaDestinations}
               className="mb-[100px]"
             />
             <DestinationList
               name="Naik Naik ke Puncak Gunung"
-              destinations={[]}
+              destinations={mountainDestinations}
               className="mb-[100px]"
             />
             <DestinationList
               name="Menyatu Dengan Alam"
-              destinations={[]}
+              destinations={natureDestinations}
               className="mb-[200px]"
             />
           </div>
