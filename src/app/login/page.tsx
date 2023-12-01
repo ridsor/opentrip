@@ -20,7 +20,8 @@ export default function Login() {
                 className="w-full bg-cover bg-center h-[1024px] relative bg-blend-multiply bg-[rgba(4,4,4,.3)]"
                 style={{
                   backgroundImage: `url(${background_login.src})`,
-                }}>
+                }}
+              >
                 <span className="absolute bottom-[30px] left-[100px] font-medium text-lg text-white">
                   Pantai Keliking Bali
                 </span>
@@ -42,7 +43,8 @@ export default function Login() {
                   <div className="form-input mb-10 w-full lg:w-[457px]">
                     <label
                       htmlFor="username"
-                      className="text-[#8E8E8E] text-base mb-[10px] inline-block">
+                      className="text-[#8E8E8E] text-base mb-[10px] inline-block"
+                    >
                       Username
                     </label>
                     <input
@@ -55,7 +57,8 @@ export default function Login() {
                   <div className="form-input mb-10 w-full lg:w-[457px]">
                     <label
                       htmlFor="password"
-                      className="text-[#8E8E8E] text-base mb-[10px] inline-block">
+                      className="text-[#8E8E8E] text-base mb-[10px] inline-block"
+                    >
                       Password
                     </label>
                     <input
@@ -73,15 +76,16 @@ export default function Login() {
                   <div className="flex justify-between flex-wrap gap-x-6 gap-y-2">
                     <Link
                       href="/"
-                      className="text-base text-[#8f8f8f8f] tracking-[0.2px]">
+                      className="text-base text-[#8f8f8f8f] tracking-[0.2px]"
+                    >
                       Forgot password
                     </Link>
-                    <Link
-                      href="/register"
-                      className="text-base text-[#8f8f8f8f] tracking-[0.2px]">
+                    <span className="text-base text-[#8f8f8f] tracking-[0.2px]">
                       Don&apos;t have an account?{" "}
-                      <span className="text-dark-pink">Register Here</span>
-                    </Link>
+                      <Link href="/register" className="text-dark-pink">
+                        Register Here
+                      </Link>
+                    </span>
                   </div>
                 </form>
                 <div className="absolute bottom-[30px] w-full text-center text-sm font-medium text-[#b0b0b0]">

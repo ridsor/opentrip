@@ -21,9 +21,10 @@ export default function Footer() {
             <Image
               src={icon_brand}
               alt=""
-              width={216.011}
-              height={30.329}
+              width={216}
+              height={30}
               priority
+              className="w-[216px] h-[30px]"
             />
           </div>
           <div className="company whitespace-nowrap">

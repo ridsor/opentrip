@@ -18,10 +18,10 @@ export default function MobileHeader(props: Props) {
         <Image
           src={icon_brand}
           alt="brand"
-          width={156.689}
+          width={156}
           height={22}
           priority
-          className="w-full h-auto"
+          className="w-[256px] h-[22px]"
         />
       </div>
       <div className="right">

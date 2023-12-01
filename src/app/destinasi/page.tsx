@@ -15,9 +15,10 @@ interface Filter {
 }
 
 const sortOptions = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
+  { value: "az", label: "A-Z" },
+  { value: "za", label: "Z-A" },
+  { value: "now", label: "Terbaru" },
+  { value: "latest", label: "Terlama" },
 ];
 
 const sortSelect = {
