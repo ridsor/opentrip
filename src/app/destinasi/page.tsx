@@ -150,8 +150,7 @@ export default function Destinasi() {
   }, []);
 
   return (
-    <>
-      <main>
+    <main>
       <section className="pt-[calc(72px+70px)]">
         <div className="container">
           <div className="flex justify-between flex-wrap gap-[10px] border-b mb-[52px] border-[#e3e3e3] items-center relative before:absolute before:content-[''] before:block before:w-[100px] before:border-b-8 before:border-dark-pink before:bottom-0 before:left-0">
@@ -200,10 +199,7 @@ export default function Destinasi() {
           </div>
         </div>
       </section>
+      <Script src="/assets/js/destination.js"></Script>
     </main>
-    <Script>
-      console.log('hai')
-    </Script>
-    </>
   );
 }
