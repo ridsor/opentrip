@@ -5,15 +5,12 @@ import DestinationList from "./DestinationList";
 import icon_filter from "@/app/assets/image/icon/fluent_filter.svg";
 import Filter from "./Filter";
 import Paginate from "./Paginate";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Select, { components } from "react-select";
 import "./style.css";
 import { SingleValue } from "react-select/dist/declarations/src";
 import Script from "next/script";
-
-interface Filter {
-  tanggal_keberangkatan: Date | null;
-}
+import { getData, postData } from "@/services/destinastion";
 
 interface Destination {
   id: number;
@@ -25,51 +22,31 @@ interface Destination {
   package: string;
   description: string;
   travel_theme: string;
-  travel_type: string;
-  quota: number;
-  terms_conditions: string;
-  date_departure: string[];
-  departure_location: {
-    name: string;
-    location: string[];
-  }[];
-  trip_detail: {
-    hour: string;
-    description: string;
-  }[][];
-  gallery: string[];
-  review: {
-    name: string;
-    avatar: string;
-    usename: string;
-    rating: string;
-    content: string;
-  }[];
 }
 
-interface filter {
+interface Filter {
   travel_type_open_trip: boolean;
   travel_type_private_trip: boolean;
-  travel_theme: string;
-  price: {
-    min: number;
-    max: number;
-  };
+  travel_theme_popular_destination: boolean;
+  travel_theme_vitaminsea_destination: boolean;
+  travel_theme_mountain_destination: boolean;
+  travel_theme_nature_destination: boolean;
+  min_price: number;
+  max_price: number;
   departure_location: string;
   destination: string;
-  date_departure: string;
-  rating: number;
-  duration: {
-    min: number;
-    max: number;
-  };
+  date_departure?: Date;
+  rating5: boolean;
+  rating34: boolean;
+  min_duration: number;
+  max_duration: number;
 }
 
 const sortOptions = [
-  { value: "az", label: "A-Z" },
-  { value: "za", label: "Z-A" },
-  { value: "now", label: "Terbaru" },
-  { value: "latest", label: "Terlama" },
+  { value: { orderby: "asc", order: "name" }, label: "A-Z" },
+  { value: { orderby: "desc", order: "name" }, label: "Z-A" },
+  { value: { orderby: "desc", order: "createdAt" }, label: "Terbaru" },
+  { value: { orderby: "asc", order: "createdAt" }, label: "Terlama" },
 ];
 
 const sortSelect = {
@@ -131,23 +108,53 @@ const sortSelect = {
 
 export default function Destinasi() {
   const [destinations, setDestinations] = useState<Destination[]>();
-  const [filters, setFilters] = useState<Filter>({
-    tanggal_keberangkatan: null,
+  const [filter, setFilter] = useState<Filter>({
+    travel_type_open_trip: false,
+    travel_type_private_trip: false,
+    travel_theme_popular_destination: false,
+    travel_theme_vitaminsea_destination: false,
+    travel_theme_mountain_destination: false,
+    travel_theme_nature_destination: false,
+    min_price: 0,
+    max_price: 0,
+    departure_location: "",
+    destination: "",
+    rating5: false,
+    rating34: false,
+    min_duration: 1,
+    max_duration: 10,
   });
 
-  const [selectedSortOption, setSelectedSortOption] =
-    useState<SingleValue<{ value: string; label: string }>>(null);
-  const [isFilter, setFilter] = useState<boolean>(false);
+  const [selectedSortOption, setSelectedSortOption] = useState<
+    SingleValue<{
+      value: { orderby: string; order: string };
+      label: string;
+    }>
+  >(null);
+  const [isFilter, setIsFilter] = useState<boolean>(false);
 
   const handleOnChangeFilter = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-      setFilters((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFilter((prev) => ({
+        ...prev,
+        [e.target.name]:
+          e.target.type == "checkbox" ? e.target.checked : e.target.value,
+      }));
     },
     []
   );
   const handleChangeDate = useCallback((date: Date) => {
-    setFilters((prev) => ({ ...prev, tanggal_keberangkatan: date }));
+    setFilter((prev) => ({ ...prev, tanggal_keberangkatan: date }));
   }, []);
+
+  useEffect(() => {
+    postData<Destination[]>("/destination?p=1&l=9", {
+      filter,
+      sort: selectedSortOption,
+    }).then((data) => {
+      setDestinations(data);
+    });
+  }, [filter]);
 
   return (
     <main>
@@ -172,7 +179,7 @@ export default function Destinasi() {
               />
               <button
                 className="lg:hidden"
-                onClick={() => setFilter((prev) => !prev)}
+                onClick={() => setIsFilter((prev) => !prev)}
               >
                 <Image src={icon_filter} alt="" width={24} height={24} />
               </button>
@@ -187,13 +194,13 @@ export default function Destinasi() {
               } lg:opacity-100 top-0 transition-all ease-out w-[255px] lg:pointer-events-auto absolute lg:static z-10 lg:block`}
             >
               <Filter
-                filters={filters}
+                filter={filter}
                 onChangeFilter={handleOnChangeFilter}
                 onChangeDate={handleChangeDate}
               />
             </div>
             <div className="flex-1">
-              <DestinationList destination={[]} />
+              <DestinationList destinations={destinations} />
               <Paginate />
             </div>
           </div>

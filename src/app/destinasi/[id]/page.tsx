@@ -1,10 +1,41 @@
-import Script from "next/script";
-
 interface Props {
   params: {
     id: number;
   };
 }
+
+interface Destination {
+  id: number;
+  name: string;
+  image: string;
+  province: string;
+  price: number;
+  rating: number;
+  package: string;
+  description: string;
+  travel_theme: string;
+  travel_type: string;
+  quota: number;
+  terms_conditions: string;
+  date_departure: string[];
+  departure_location: {
+    name: string;
+    location: string[];
+  }[];
+  trip_detail: {
+    hour: string;
+    description: string;
+  }[][];
+  gallery: string[];
+  review: {
+    name: string;
+    avatar: string;
+    usename: string;
+    rating: string;
+    content: string;
+  }[];
+}
+
 export default function DetailDestination(props: Props) {
   return (
     <>
@@ -113,7 +144,6 @@ export default function DetailDestination(props: Props) {
           </div>
         </div>
       </article>
-      <Script>window.scrollTo(0, 0);</Script>
     </>
   );
 }
