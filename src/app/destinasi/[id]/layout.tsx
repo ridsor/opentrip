@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import Select, { components, Options, SingleValue } from "react-select";
+import Select, { components, SingleValue } from "react-select";
 
 interface Props {
   children: React.ReactNode;
@@ -132,19 +132,12 @@ export default function Layout(props: Props) {
                     onChange={(selectedPickupPointOption) =>
                       setSelectedPickupPointOption(selectedPickupPointOption)
                     }
+                    isSearchable={false}
                     options={pickupPointOptions}
                     {...pickupPointSelect}
                     placeholder="Pilih tempat"
                     className="w-full max-w-[295px] font-medium text-[12px] relative z-10"
                   />
-                  {/* <button className="rounded-lg border border-[#d4d4d4] h-[40px] w-[295px] font-medium text-[12px] flex items-center">
-                    <span className="flex-1 text-left pl-[15px]">
-                      Indomart Point Mall Taman Anggrek
-                    </span>
-                    <div className="px-[15px] ">
-                      <Image src={icon_vector} alt="" />
-                    </div>
-                  </button> */}
                 </div>
                 <div
                   className={`${

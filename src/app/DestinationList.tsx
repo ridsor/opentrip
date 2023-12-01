@@ -39,11 +39,24 @@ export default function DestinationList(props: Props) {
           />
         </Link>
       </div>
-      <div className="destionation-list">
-        {props.destinations.map((destination) => (
+      <div className="destionation-wrapper relative">
+        <div className="destionation-list">
+          {props.destinations.map((destination) => (
+            <DestinationItem
+              key={1}
+              id={1}
+              image=""
+              package="3D1N"
+              place_name="Tanjung Benao"
+              province="Bali"
+              description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
+              price={2000000}
+              rating={4.5}
+            />
+          ))}
           <DestinationItem
-            key={1}
-            id={1}
+            key={2}
+            id={2}
             image=""
             package="3D1N"
             place_name="Tanjung Benao"
@@ -52,29 +65,73 @@ export default function DestinationList(props: Props) {
             price={2000000}
             rating={4.5}
           />
-        ))}
-        <DestinationItem
-          key={2}
-          id={2}
-          image=""
-          package="3D1N"
-          place_name="Tanjung Benao"
-          province="Bali"
-          description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-          price={2000000}
-          rating={4.5}
-        />
-        <DestinationItem
-          key={3}
-          id={3}
-          image=""
-          package="3D1N"
-          place_name="Tanjung Benao"
-          province="Bali"
-          description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-          price={2000000}
-          rating={4.5}
-        />
+          <DestinationItem
+            key={2}
+            id={2}
+            image=""
+            package="3D1N"
+            place_name="Tanjung Benao"
+            province="Bali"
+            description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
+            price={2000000}
+            rating={4.5}
+          />
+          <DestinationItem
+            key={2}
+            id={2}
+            image=""
+            package="3D1N"
+            place_name="Tanjung Benao"
+            province="Bali"
+            description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
+            price={2000000}
+            rating={4.5}
+          />
+          <DestinationItem
+            key={2}
+            id={2}
+            image=""
+            package="3D1N"
+            place_name="Tanjung Benao"
+            province="Bali"
+            description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
+            price={2000000}
+            rating={4.5}
+          />
+          <DestinationItem
+            key={2}
+            id={2}
+            image=""
+            package="3D1N"
+            place_name="Tanjung Benao"
+            province="Bali"
+            description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
+            price={2000000}
+            rating={4.5}
+          />
+          <DestinationItem
+            key={2}
+            id={2}
+            image=""
+            package="3D1N"
+            place_name="Tanjung Benao"
+            province="Bali"
+            description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
+            price={2000000}
+            rating={4.5}
+          />
+          <DestinationItem
+            key={3}
+            id={3}
+            image=""
+            package="3D1N"
+            place_name="Tanjung Benao"
+            province="Bali"
+            description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
+            price={2000000}
+            rating={4.5}
+          />
+        </div>
       </div>
     </div>
   );

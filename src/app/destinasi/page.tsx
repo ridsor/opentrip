@@ -112,6 +112,7 @@ export default function Destinasi() {
                   setSelectedSortOption(selectedSortOption)
                 }
                 options={sortOptions}
+                isSearchable={false}
                 {...sortSelect}
               />
               <button
