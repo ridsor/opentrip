@@ -14,6 +14,56 @@ interface Filter {
   tanggal_keberangkatan: Date | null;
 }
 
+interface Destination {
+  id: number;
+  name: string;
+  image: string;
+  province: string;
+  price: number;
+  rating: number;
+  package: string;
+  description: string;
+  travel_theme: string;
+  travel_type: string;
+  quota: number;
+  terms_conditions: string;
+  date_departure: string[];
+  departure_location: {
+    name: string;
+    location: string[];
+  }[];
+  trip_detail: {
+    hour: string;
+    description: string;
+  }[][];
+  gallery: string[];
+  review: {
+    name: string;
+    avatar: string;
+    usename: string;
+    rating: string;
+    content: string;
+  }[];
+}
+
+interface filter {
+  travel_type_open_trip: boolean;
+  travel_type_private_trip: boolean;
+  travel_theme: string;
+  price: {
+    min: number;
+    max: number;
+  };
+  departure_location: string;
+  destination: string;
+  date_departure: string;
+  rating: number;
+  duration: {
+    min: number;
+    max: number;
+  };
+}
+
 const sortOptions = [
   { value: "az", label: "A-Z" },
   { value: "za", label: "Z-A" },
@@ -79,18 +129,21 @@ const sortSelect = {
 };
 
 export default function Destinasi() {
-  const [selectedSortOption, setSelectedSortOption] =
-    useState<SingleValue<{ value: string; label: string }>>(null);
+  const [destinations, setDestinations] = useState<Destination[]>();
   const [filters, setFilters] = useState<Filter>({
     tanggal_keberangkatan: null,
   });
+
+  const [selectedSortOption, setSelectedSortOption] =
+    useState<SingleValue<{ value: string; label: string }>>(null);
   const [isFilter, setFilter] = useState<boolean>(false);
 
-  const handleOnChangeFilter = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    setFilters((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const handleOnChangeFilter = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      setFilters((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    },
+    []
+  );
   const handleChangeDate = useCallback((date: Date) => {
     setFilters((prev) => ({ ...prev, tanggal_keberangkatan: date }));
   }, []);

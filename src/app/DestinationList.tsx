@@ -5,13 +5,14 @@ import arrow from "@/app/assets/image/icon/bi_arrow-right.svg";
 
 interface Destination {
   id: number;
+  name: string;
   image: string;
-  place_name: string;
   province: string;
-  package: string;
-  description: string;
   price: number;
   rating: number;
+  package: string;
+  description: string;
+  travel_theme: string;
 }
 
 interface Props {
@@ -43,94 +44,17 @@ export default function DestinationList(props: Props) {
         <div className="destionation-list">
           {props.destinations.map((destination) => (
             <DestinationItem
-              key={1}
-              id={1}
-              image="https://loremflickr.com/300/300/city"
-              package="3D1N"
-              place_name="Tanjung Benao"
-              province="Bali"
-              description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-              price={2000000}
-              rating={4.5}
+              key={destination.id}
+              id={destination.id}
+              image={destination.image}
+              package={destination.package}
+              place_name={destination.name}
+              province={destination.province}
+              description={destination.description}
+              price={destination.price}
+              rating={destination.rating}
             />
           ))}
-          <DestinationItem
-            key={2}
-            id={2}
-            image="https://loremflickr.com/300/300/city"
-            package="3D1N"
-            place_name="Tanjung Benao"
-            province="Bali"
-            description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-            price={2000000}
-            rating={4.5}
-          />
-          <DestinationItem
-            key={2}
-            id={2}
-            image="https://loremflickr.com/300/300/city"
-            package="3D1N"
-            place_name="Tanjung Benao"
-            province="Bali"
-            description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-            price={2000000}
-            rating={4.5}
-          />
-          <DestinationItem
-            key={2}
-            id={2}
-            image="https://loremflickr.com/300/300/city"
-            package="3D1N"
-            place_name="Tanjung Benao"
-            province="Bali"
-            description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-            price={2000000}
-            rating={4.5}
-          />
-          <DestinationItem
-            key={2}
-            id={2}
-            image="https://loremflickr.com/300/300/city"
-            package="3D1N"
-            place_name="Tanjung Benao"
-            province="Bali"
-            description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-            price={2000000}
-            rating={4.5}
-          />
-          <DestinationItem
-            key={2}
-            id={2}
-            image="https://loremflickr.com/300/300/city"
-            package="3D1N"
-            place_name="Tanjung Benao"
-            province="Bali"
-            description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-            price={2000000}
-            rating={4.5}
-          />
-          <DestinationItem
-            key={2}
-            id={2}
-            image="https://loremflickr.com/300/300/city"
-            package="3D1N"
-            place_name="Tanjung Benao"
-            province="Bali"
-            description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-            price={2000000}
-            rating={4.5}
-          />
-          <DestinationItem
-            key={3}
-            id={3}
-            image="https://loremflickr.com/300/300/city"
-            package="3D1N"
-            place_name="Tanjung Benao"
-            province="Bali"
-            description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-            price={2000000}
-            rating={4.5}
-          />
         </div>
       </div>
     </div>
