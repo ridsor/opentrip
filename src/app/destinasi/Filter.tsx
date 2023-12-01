@@ -5,12 +5,24 @@ import Image from "next/image";
 import ReactDatePicker from "react-datepicker";
 
 interface Props {
-  filters: {
-    tanggal_keberangkatan: Date | null;
+  filter: {
+    travel_type_open_trip: boolean;
+    travel_type_private_trip: boolean;
+    travel_theme_popular_destination: boolean;
+    travel_theme_vitaminsea_destination: boolean;
+    travel_theme_mountain_destination: boolean;
+    travel_theme_nature_destination: boolean;
+    min_price: number;
+    max_price: number;
+    departure_location: string;
+    destination: string;
+    date_departure?: Date;
+    rating5: boolean;
+    rating34: boolean;
+    min_duration: number;
+    max_duration: number;
   };
-  onChangeFilter: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void;
+  onChangeFilter: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDate: (date: Date) => void;
 }
 
@@ -36,18 +48,30 @@ export default function Filter(props: Props) {
           <div className="overflow-hidden transition-all ease-in">
             <div className="flex gap-[15px] p-[15px] flex-col">
               <div className="flex gap-[11px] items-center">
-                <input type="checkbox" id="open_trip" />{" "}
+                <input
+                  type="checkbox"
+                  id="travel_type_open_trip"
+                  name="travel_type_open_trip"
+                  onChange={props.onChangeFilter}
+                  checked={props.filter.travel_type_open_trip}
+                />{" "}
                 <label
-                  htmlFor="open_trip"
+                  htmlFor="travel_type_open_trip"
                   className="text-[12px] font-medium tracking-[0.2px] leading-3"
                 >
                   Open Trip
                 </label>
               </div>
               <div className="flex gap-[11px] items-center">
-                <input type="checkbox" id="private_trip" />{" "}
+                <input
+                  type="checkbox"
+                  id="travel_type_private_trip"
+                  name="travel_type_private_trip"
+                  onChange={props.onChangeFilter}
+                  checked={props.filter.travel_type_private_trip}
+                />{" "}
                 <label
-                  htmlFor="private_trip"
+                  htmlFor="travel_type_private_trip"
                   className="text-[12px] font-medium tracking-[0.2px] leading-3"
                 >
                   Private Trip
@@ -68,36 +92,60 @@ export default function Filter(props: Props) {
           <div className="overflow-hidden transition-all ease-in">
             <div className=" flex gap-[15px] p-[15px] flex-col">
               <div className="flex gap-[11px] items-center">
-                <input type="checkbox" id="destinasi_populer" />{" "}
+                <input
+                  type="checkbox"
+                  id="travel_theme_popular_destination"
+                  name="travel_theme_popular_destination"
+                  checked={props.filter.travel_theme_popular_destination}
+                  onChange={props.onChangeFilter}
+                />{" "}
                 <label
-                  htmlFor="destinasi_populer"
+                  htmlFor="travel_theme_popular_destination"
                   className="text-[12px] font-medium tracking-[0.2px] leading-3"
                 >
                   Destinasi Populer
                 </label>
               </div>
               <div className="flex gap-[11px] items-center">
-                <input type="checkbox" id="vitamin_sea" />{" "}
+                <input
+                  type="checkbox"
+                  id="travel_theme_vitaminsea_destination"
+                  name="travel_theme_vitaminsea_destination"
+                  checked={props.filter.travel_theme_vitaminsea_destination}
+                  onChange={props.onChangeFilter}
+                />{" "}
                 <label
-                  htmlFor="vitamin_sea"
+                  htmlFor="travel_theme_vitaminsea_destination"
                   className="text-[12px] font-medium tracking-[0.2px] leading-3"
                 >
                   Vitamin Sea
                 </label>
               </div>
               <div className="flex gap-[11px] items-center">
-                <input type="checkbox" id="naik_naik_ke_puncak_gunung" />{" "}
+                <input
+                  type="checkbox"
+                  id="travel_theme_mountain_destination"
+                  name="travel_theme_mountain_destination"
+                  checked={props.filter.travel_theme_mountain_destination}
+                  onChange={props.onChangeFilter}
+                />{" "}
                 <label
-                  htmlFor="naik_naik_ke_puncak_gunung"
+                  htmlFor="travel_theme_mountain_destination"
                   className="text-[12px] font-medium tracking-[0.2px] leading-3"
                 >
                   Naik Naik ke Puncak Gunung
                 </label>
               </div>
               <div className="flex gap-[11px] items-center">
-                <input type="checkbox" id="menyatu_dengan_alam" />{" "}
+                <input
+                  type="checkbox"
+                  id="travel_theme_nature_destination"
+                  name="travel_theme_nature_destination"
+                  checked={props.filter.travel_theme_nature_destination}
+                  onChange={props.onChangeFilter}
+                />{" "}
                 <label
-                  htmlFor="menyatu_dengan_alam"
+                  htmlFor="travel_theme_nature_destination"
                   className="text-[12px] font-medium tracking-[0.2px] leading-3"
                 >
                   Menyatu Dengan Alam
@@ -119,28 +167,34 @@ export default function Filter(props: Props) {
             <div className="flex gap-[10px] p-[15px] flex-col">
               <div className="flex items-center border-[#e4e4e4] h-[32px] rounded-md border overflow-hidden">
                 <label
-                  htmlFor="budget_minimum"
+                  htmlFor="min_price"
                   className="text-[12px] font-medium  leading-3 bg-[#f3f3f3] pr-[8px] pl-[9px] h-full flex items-center text-[#4d4d4d]"
                 >
                   Rp
                 </label>
                 <input
                   type="text"
-                  id="budget_minimum"
+                  id="min_price"
+                  name="min_price"
+                  onChange={props.onChangeFilter}
+                  value={props.filter.min_price}
                   className="w-full placeholder:text-[#bcbcbc] h-full px-[10px] tracking-[0.2px] placeholder:tracking-[0.2px] outline-none"
                   placeholder="Budget minimum"
                 />
               </div>
               <div className="flex items-center border-[#e4e4e4] h-[32px] rounded-md border overflow-hidden">
                 <label
-                  htmlFor="budget_maksimum"
+                  htmlFor="max_price"
                   className="text-[12px] font-medium  leading-3 bg-[#f3f3f3] pr-[8px] pl-[9px] h-full flex items-center text-[#4d4d4d]"
                 >
                   Rp
                 </label>
                 <input
                   type="text"
-                  id="budget_maksimum"
+                  id="max_price"
+                  name="max_price"
+                  value={props.filter.max_price}
+                  onChange={props.onChangeFilter}
                   className="w-full placeholder:text-[#bcbcbc] h-full px-[10px] tracking-[0.2px] placeholder:tracking-[0.2px] outline-none"
                   placeholder="Budget maksimum"
                 />
@@ -161,7 +215,7 @@ export default function Filter(props: Props) {
             <div className="flex gap-[10px] p-[15px] flex-col">
               <div className="flex items-center border-[#e4e4e4] h-[32px] rounded-md border overflow-hidden">
                 <label
-                  htmlFor="lokasi_keberangkatan"
+                  htmlFor="departure_location"
                   className="text-[12px] font-medium  leading-3 bg-[#f3f3f3] pr-[8px] pl-[9px] h-full flex items-center text-[#4d4d4d]"
                 >
                   <svg
@@ -193,9 +247,12 @@ export default function Filter(props: Props) {
                 </label>
                 <input
                   type="text"
-                  id="lokasi_keberangkatan"
+                  id="departure_location"
                   className="w-full placeholder:text-[#bcbcbc] h-full px-[10px] tracking-[0.2px] placeholder:tracking-[0.2px] outline-none"
                   placeholder="Cari lokasi keberangkatan"
+                  name="departure_location"
+                  value={props.filter.departure_location}
+                  onChange={props.onChangeFilter}
                 />
               </div>
             </div>
@@ -212,7 +269,7 @@ export default function Filter(props: Props) {
             <div className="flex gap-[10px] p-[15px] flex-col">
               <div className="flex items-center border-[#e4e4e4] h-[32px] rounded-md border overflow-hidden">
                 <label
-                  htmlFor="lokasi_keberangkatan"
+                  htmlFor="destination"
                   className="text-[12px] font-medium  leading-3 bg-[#f3f3f3] pr-[8px] pl-[9px] h-full flex items-center text-[#4d4d4d]"
                 >
                   <svg
@@ -244,9 +301,12 @@ export default function Filter(props: Props) {
                 </label>
                 <input
                   type="text"
-                  id="lokasi_keberangkatan"
+                  id="destination"
+                  name="destination"
                   className="w-full placeholder:text-[#bcbcbc] h-full px-[10px] tracking-[0.2px] placeholder:tracking-[0.2px] outline-none"
                   placeholder="Cari destinasi"
+                  value={props.filter.destination}
+                  onChange={props.onChangeFilter}
                 />
               </div>
             </div>
@@ -265,7 +325,7 @@ export default function Filter(props: Props) {
             <div className="flex gap-[10px] p-[15px] flex-col">
               <div className="flex items-center border-[#e4e4e4] h-[32px] rounded-md border overflow-hidden">
                 <label
-                  htmlFor="tanggal_keberangkatan"
+                  htmlFor="date_departure"
                   className="text-[12px] font-medium  leading-3 bg-[#f3f3f3] pr-[8px] pl-[9px] h-full flex items-center text-[#4d4d4d]"
                 >
                   <svg
@@ -314,11 +374,11 @@ export default function Filter(props: Props) {
                   </svg>
                 </label>
                 <ReactDatePicker
-                  selected={props.filters.tanggal_keberangkatan}
+                  selected={props.filter.date_departure}
                   onChange={(date: Date) => props.onChangeDate(date)}
                   placeholderText="Pilih tanggal keberangkatan"
-                  name="tanggal_keberangkatan"
-                  id="tanggal_keberangkatan"
+                  name="date_departure"
+                  id="date_departure"
                   className=""
                 />
               </div>
@@ -337,9 +397,15 @@ export default function Filter(props: Props) {
           <div className="overflow-hidden ease-in transition-all">
             <div className=" flex gap-[15px] p-[15px] flex-col">
               <div className="flex gap-[11px] items-center">
-                <input type="checkbox" id="peringkat_5" />{" "}
+                <input
+                  type="checkbox"
+                  id="rating5"
+                  name="rating5"
+                  checked={props.filter.rating5}
+                  onChange={props.onChangeFilter}
+                />{" "}
                 <label
-                  htmlFor="peringkat_5"
+                  htmlFor="rating5"
                   className="text-[12px] font-medium tracking-[0.2px] leading-3 flex gap-[5px] items-center text-[#4d4d4d]"
                 >
                   <Image
@@ -353,9 +419,15 @@ export default function Filter(props: Props) {
                 </label>
               </div>
               <div className="flex gap-[11px] items-center">
-                <input type="checkbox" id="peringkat_3_4" />{" "}
+                <input
+                  type="checkbox"
+                  id="rating34"
+                  name="rating34"
+                  checked={props.filter.rating34}
+                  onChange={props.onChangeFilter}
+                />{" "}
                 <label
-                  htmlFor="peringkat_3_4"
+                  htmlFor="rating34"
                   className="text-[12px] font-medium tracking-[0.2px] leading-3 flex gap-[5px] items-center text-[#4d4d4d]"
                 >
                   <Image
@@ -384,12 +456,14 @@ export default function Filter(props: Props) {
                 <div className="flex items-center border flex-1 border-[#e4e4e4] rounded-md overflow-hidden">
                   <input
                     type="number"
-                    id="durasi_minimum"
+                    id="min_duration"
+                    name="min_duration"
                     className="outline-none h-[32px] w-full pl-[11px]"
-                    defaultValue={1}
+                    value={props.filter.min_duration}
+                    onChange={props.onChangeFilter}
                   />
                   <label
-                    htmlFor="durasi_minimum"
+                    htmlFor="min_duration"
                     className="text-[12px] font-medium tracking-[0.2px] px-[6px] h-full flex items-center"
                   >
                     Hari
@@ -399,12 +473,14 @@ export default function Filter(props: Props) {
                 <div className="flex items-center flex-1 border border-[#e4e4e4] rounded-md overflow-hidden">
                   <input
                     type="number"
-                    id="durasi_maksimum"
+                    id="max_duration"
+                    name="max_duration"
                     className="outline-none h-[32px] w-full pl-[11px]"
-                    defaultValue={10}
+                    value={props.filter.max_duration}
+                    onChange={props.onChangeFilter}
                   />
                   <label
-                    htmlFor="durasi_maksimum"
+                    htmlFor="max_duration"
                     className="text-[12px] font-medium tracking-[0.2px] px-[6px] h-full flex items-center"
                   >
                     Hari
