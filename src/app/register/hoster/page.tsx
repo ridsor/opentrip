@@ -1,8 +1,93 @@
+"use client";
+
 import cloud_upload_outlined from "@/app/assets/image/icon/cloud-upload-outlined.svg";
 import search from "@/app/assets/image/icon/search.svg";
 import Image from "next/image";
+import { useState } from "react";
+import Select, { SingleValue, components } from "react-select";
+
+const bankOptions = [
+  {
+    value: "BTN",
+    label: "BTN",
+  },
+  {
+    value: "BTPN",
+    label: "BTPN",
+  },
+  {
+    value: "BTN Syariah",
+    label: "BTN Syariah",
+  },
+  {
+    value: "BTPN Syariah",
+    label: "BTPN Syariah",
+  },
+];
+
+const bankSelect = {
+  components: {
+    DropdownIndicator: (props: any) => (
+      <components.DropdownIndicator {...props}>
+        <Image
+          src={search}
+          width={24}
+          height={24}
+          alt=""
+          className="w-[24] aspect-square"
+        />
+      </components.DropdownIndicator>
+    ),
+  },
+  styles: {
+    control: (baseStyles: any) => ({
+      ...baseStyles,
+      borderColor: "#bdbdbd",
+      height: "60px",
+      minHeight: "60px",
+      overflow: "hidden",
+      boxShadow: "none",
+      "&:hover": {
+        borderColor: "#bdbdbd",
+      },
+    }),
+    input: (provided: any, state: any) => ({
+      ...provided,
+      margin: "0px",
+    }),
+    valueContainer: (provided: any, state: any) => ({
+      ...provided,
+      height: "60px",
+      padding: "0 0 0 10px",
+    }),
+    indicatorSeparator: (state: any) => ({
+      display: "none",
+    }),
+    indicatorsContainer: (provided: any, state: any) => ({
+      ...provided,
+      height: "60px",
+      backgroundColor: "#e7e7e7",
+      width: "58px",
+      justifyContent: "center",
+      display: "flex",
+    }),
+  },
+  theme: (theme: any) => ({
+    ...theme,
+    borderRadius: 10,
+    colors: {
+      ...theme.colors,
+      primary25: "#E5E5E5",
+      primary: "#FF385C",
+      primary50: "none",
+    },
+  }),
+};
 
 export default function RegisterHoster() {
+  const [selectedBankOption, setSelectedBankOption] =
+    useState<SingleValue<{ value: string; label: string }>>(null);
+
   return (
     <main>
       <section className="bg-[#f5f5f5] pt-[calc(115px+72px)] pb-[149px]">
@@ -117,21 +202,23 @@ export default function RegisterHoster() {
               </div>
               <div className="form-input mb-7">
                 <label
-                  htmlFor="search_bank"
+                  htmlFor="bank"
                   className="block mb-2 text-base text-[#8e8e8e]"
                 >
                   Bank Pembayaran
                 </label>
-                <div className="relative border border-[#bdbdbd] rounded-[10px] overflow-hidden">
-                  <input
-                    type="text"
-                    className="w-full text-lg font-medium pl-5 pr-[calc(58px+20px)]  h-[60px] outline-none"
-                    id="search_bank "
-                  />
-                  <button className="p-[17px] absolute right-0 top-0 bottom-0 bg-[#e7e7e7]">
-                    <Image src={search} width={24} height={24} alt="" />
-                  </button>
-                </div>
+                <Select
+                  className="text-lg font-medium"
+                  defaultValue={selectedBankOption}
+                  name="bank"
+                  id="bank"
+                  onChange={(selectedBankOption) =>
+                    setSelectedBankOption(selectedBankOption)
+                  }
+                  options={bankOptions}
+                  placeholder=""
+                  {...bankSelect}
+                />
               </div>
               <div className="form-input mb-7">
                 <label

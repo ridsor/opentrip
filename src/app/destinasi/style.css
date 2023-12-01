@@ -1,0 +1,8 @@
+.react-datepicker-wrapper {
+  display: block;
+  width: 100%;
+}
+
+.react-datepicker-wrapper input.filter {
+  @apply w-full placeholder:text-[#bcbcbc] h-full px-[10px] text-[12px] tracking-[0.2px] placeholder:tracking-[0.2px] outline-none;
+}
