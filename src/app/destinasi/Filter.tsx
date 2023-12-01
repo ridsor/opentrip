@@ -264,30 +264,30 @@ export default function Filter(props: Props) {
                   viewBox="0 0 15 15"
                   fill="none"
                 >
-                  <g clip-path="url(#clip0_126_259)">
+                  <g clipPath="url(#clip0_126_259)">
                     <path
                       d="M10.7396 2.83093H3.73958C2.45092 2.83093 1.40625 3.8756 1.40625 5.16427V10.9976C1.40625 12.2863 2.45092 13.3309 3.73958 13.3309H10.7396C12.0282 13.3309 13.0729 12.2863 13.0729 10.9976V5.16427C13.0729 3.8756 12.0282 2.83093 10.7396 2.83093Z"
                       stroke="#C0C0C0"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M4.90625 1.66425V3.99758"
                       stroke="#C0C0C0"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M9.57275 1.66425V3.99758"
                       stroke="#C0C0C0"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M1.40625 6.33093H13.0729"
                       stroke="#C0C0C0"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </g>
                   <defs>

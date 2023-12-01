@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import DatePicker from "react-datepicker";
+import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.css";
 
@@ -39,7 +39,7 @@ export default function DestinationSearchHome() {
           <label htmlFor="jadwal" className="block mb-1 text-base font-medium">
             Jadwal
           </label>
-          <DatePicker
+          <ReactDatePicker
             placeholderText="Kapan Saja"
             selected={inputs.timetable}
             onChange={(date: Date) =>

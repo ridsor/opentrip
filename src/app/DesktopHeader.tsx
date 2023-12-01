@@ -63,10 +63,10 @@ export default function DekstopHeader(props: Props) {
         <Image
           src={brand}
           alt="brand"
-          width={156.689}
+          width={156}
           height={22}
           priority
-          className="w-full h-auto"
+          className="w-[156px] h-[22px]"
         />
       </div>
       <div className="right">

@@ -190,14 +190,14 @@ export default function Layout(props: Props) {
                               id="Vector"
                               d="M16 12H8"
                               stroke="#C2C2C2"
-                              stroke-width="2"
-                              stroke-linecap="round"
+                              strokeWidth="2"
+                              strokeLinecap="round"
                             />
                             <path
                               id="Vector_2"
                               d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
                               stroke="#C2C2C2"
-                              stroke-width="2"
+                              strokeWidth="2"
                             />
                           </g>
                         </g>
@@ -222,14 +222,14 @@ export default function Layout(props: Props) {
                               id="Vector"
                               d="M12.4854 12H8.48535M12.4854 8V12V8ZM12.4854 12V16V12ZM12.4854 12H16.4854H12.4854Z"
                               stroke="#FF385C"
-                              stroke-width="2"
-                              stroke-linecap="round"
+                              strokeWidth="2"
+                              strokeLinecap="round"
                             />
                             <path
                               id="Vector_2"
                               d="M12.4854 22C18.0082 22 22.4854 17.5228 22.4854 12C22.4854 6.47715 18.0082 2 12.4854 2C6.9625 2 2.48535 6.47715 2.48535 12C2.48535 17.5228 6.9625 22 12.4854 22Z"
                               stroke="#FF385C"
-                              stroke-width="2"
+                              strokeWidth="2"
                             />
                           </g>
                         </g>

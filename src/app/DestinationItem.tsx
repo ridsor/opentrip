@@ -50,7 +50,13 @@ export default function DestinationItem(props: Props) {
               <span className="text-[12px] font-medium"> / Orang</span>
             </div>
             <div className="rating flex items-center gap-[2px]">
-              <Image src={star} alt="star" width={20} height={20} />
+              <Image
+                src={star}
+                alt="star"
+                width={20}
+                height={20}
+                className="w-5 h-5"
+              />
               <span className="text-[12px] font-bold"> {props.rating}</span>
             </div>
           </div>

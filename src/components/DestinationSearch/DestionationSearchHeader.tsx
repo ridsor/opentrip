@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import DatePicker from "react-datepicker";
+import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.css";
 
@@ -47,7 +47,7 @@ export default function DestinationSearch() {
             >
               Jadwal
             </label>
-            <DatePicker
+            <ReactDatePicker
               selected={inputs.timetable}
               onChange={(date: Date) =>
                 setInputs((prev) => ({ ...prev, timetable: date }))
@@ -55,6 +55,7 @@ export default function DestinationSearch() {
               name="jadwal"
               id="jadwal"
               className="search_destination"
+              placeholderText="Kapan Saja"
             />
           </div>
         </div>

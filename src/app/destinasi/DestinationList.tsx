@@ -21,7 +21,7 @@ export default function DestinationList(props: Props) {
       <DestinationItem
         key={1}
         id={1}
-        image=""
+        image="https://loremflickr.com/300/300/city"
         package="3D1N"
         place_name="Tanjung Benao"
         province="Bali"
@@ -32,7 +32,7 @@ export default function DestinationList(props: Props) {
       <DestinationItem
         key={3}
         id={3}
-        image=""
+        image="https://loremflickr.com/300/300/city"
         package="3D1N"
         place_name="Tanjung Benao"
         province="Bali"
@@ -43,7 +43,7 @@ export default function DestinationList(props: Props) {
       <DestinationItem
         key={2}
         id={2}
-        image=""
+        image="https://loremflickr.com/300/300/city"
         package="3D1N"
         place_name="Tanjung Benao"
         province="Bali"
@@ -54,7 +54,7 @@ export default function DestinationList(props: Props) {
       <DestinationItem
         key={4}
         id={4}
-        image=""
+        image="https://loremflickr.com/300/300/city"
         package="3D1N"
         place_name="Tanjung Benao"
         province="Bali"

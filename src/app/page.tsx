@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import background_hero from "./assets/image/background/asad-photo-maldives.png";
 import background_phone1 from "./assets/image/background/background_phone1.png";
 import background_phone2 from "./assets/image/background/background_phone2.png";
-import DestinationSearch from "@/components/DestinationSearch/DestionationSearchHeader";
 import "./style.css";
 import DestinationList from "./DestinationList";
 import Link from "next/link";
@@ -100,7 +99,7 @@ export default function Home() {
                     width={232}
                     height={464}
                     priority
-                    className="max-w-none"
+                    className="max-w-none w-[232px] h-[464px]"
                   />
                 </div>
                 <div className="absolute bottom-0 left-[calc(232px+32px)]">
@@ -110,7 +109,7 @@ export default function Home() {
                     width={232}
                     height={464}
                     priority
-                    className="max-w-none"
+                    className="w-[232px] h-[464px]"
                   />
                 </div>
               </div>
