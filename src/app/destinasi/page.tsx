@@ -213,7 +213,7 @@ export default function Destinasi() {
     const page = Number(searchParams.get("p")) || 1;
     const search = searchParams.get("s") || "";
 
-    postData(`/destination/filter?s=${search}`, {
+    postData(`/destination/filter?s=${search}&p=${page}`, {
       filter,
       sort: selectedSortOption,
     }).then((res) => {
