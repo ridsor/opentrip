@@ -15,6 +15,7 @@ export default function DestinationSearchHome() {
     purpose: "",
     timetable: null,
   });
+  const [delay, setDelay] = useState<NodeJS.Timeout>();
 
   const handleSearch = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,6 +34,9 @@ export default function DestinationSearchHome() {
             placeholder="Semua Tujuan"
             id="tujuan"
             name="tujuan"
+            onChange={(e) =>
+              setInputs((prev) => ({ ...prev, purpose: e.target.value }))
+            }
           />
         </div>
         <div className="lg:ml-[140px] form-input lg:mr-6 w-full">

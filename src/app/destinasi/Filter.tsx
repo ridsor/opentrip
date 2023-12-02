@@ -15,7 +15,6 @@ interface Props {
     min_price: string;
     max_price: string;
     departure_location: string;
-    destination: string;
     date_departure?: Date;
     rating5: boolean;
     rating34: boolean;
@@ -24,6 +23,7 @@ interface Props {
   };
   onChangeFilter: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDate: (date: Date) => void;
+  onChangeSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function Filter(props: Props) {
@@ -307,8 +307,7 @@ export default function Filter(props: Props) {
                   name="destination"
                   className="w-full placeholder:text-[#bcbcbc] h-full px-[10px] tracking-[0.2px] placeholder:tracking-[0.2px] outline-none"
                   placeholder="Cari destinasi"
-                  value={props.filter.destination}
-                  onChange={props.onChangeFilter}
+                  onChange={props.onChangeSearch}
                 />
               </div>
             </div>

@@ -10,9 +10,10 @@ import Select, { components } from "react-select";
 import "./style.css";
 import { SingleValue } from "react-select/dist/declarations/src";
 import Script from "next/script";
-import { getData, postData } from "@/services/destinastion";
+import { postData } from "@/services/destinastion";
 import { useSearchParams } from "next/navigation";
 import Loading from "./Loading";
+import { useRouter } from "next/navigation";
 
 interface Destination {
   id: number;
@@ -36,7 +37,6 @@ interface Filter {
   min_price: string;
   max_price: string;
   departure_location: string;
-  destination: string;
   date_departure?: Date;
   rating5: boolean;
   rating34: boolean;
@@ -148,9 +148,11 @@ interface Paginate {
 
 export default function Destinasi() {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const [isLoading, setLoading] = useState<boolean>(true);
   const [destinations, setDestinations] = useState<Destination[]>([]);
+  const [delayFilter, setDelayFilter] = useState<NodeJS.Timeout>();
   const [paginate, setPaginate] = useState<Paginate>({
     totalPage: 1,
     currentPage: 1,
@@ -166,7 +168,6 @@ export default function Destinasi() {
     min_price: "0",
     max_price: "0",
     departure_location: "",
-    destination: "",
     rating5: false,
     rating34: false,
     min_duration: "1",
@@ -183,23 +184,42 @@ export default function Destinasi() {
 
   const handleOnChangeFilter = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFilter((prev) => ({
-        ...prev,
-        [e.target.name]:
-          e.target.type == "checkbox" ? e.target.checked : e.target.value,
-      }));
+      clearTimeout(delayFilter);
+
+      setDelayFilter(
+        setTimeout(() => {
+          setFilter((prev) => ({
+            ...prev,
+            [e.target.name]:
+              e.target.type == "checkbox" ? e.target.checked : e.target.value,
+          }));
+        }, 500)
+      );
     },
     []
   );
   const handleChangeDate = useCallback((date: Date) => {
     setFilter((prev) => ({ ...prev, tanggal_keberangkatan: date }));
   }, []);
+  const handleChangeSearch = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      clearTimeout(delayFilter);
+
+      setDelayFilter(
+        setTimeout(() => {
+          router.push("/destinasi?s=" + e.target.value);
+        }, 500)
+      );
+    },
+    [delayFilter]
+  );
 
   useEffect(() => {
     setLoading(true);
     const page = Number(searchParams.get("p")) || 1;
+    const search = searchParams.get("s") || "";
 
-    postData(`/destination/filter?p=${page}`, {
+    postData(`/destination/filter?s=${search}`, {
       filter,
       sort: selectedSortOption,
     }).then((res) => {
@@ -250,6 +270,7 @@ export default function Destinasi() {
                 filter={filter}
                 onChangeFilter={handleOnChangeFilter}
                 onChangeDate={handleChangeDate}
+                onChangeSearch={handleChangeSearch}
               />
             </div>
             <div className="flex-1">

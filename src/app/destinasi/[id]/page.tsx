@@ -4,13 +4,16 @@ import icon_calendar from "@/app/assets/image/icon/akar-icons_calendar.svg";
 import icon_location from "@/app/assets/image/icon/akar-icons_location.svg";
 import icon_vector from "@/app/assets/image/icon/Vector.svg";
 import icon_three_point from "@/app/assets/image/icon/three-point.svg";
-import background_destinasi from "@/app/assets/image/background/background-login.png";
 import { useLoadScript, GoogleMap, Marker } from "@react-google-maps/api";
 import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Select, { components, SingleValue } from "react-select";
+import { getData } from "@/services/destinastion";
+import TripDetail from "./TripDetail";
+import TermsConditions from "./TermsConditions";
+import Gallery from "./Gallery";
+import Review from "./Review";
 
 interface Props {
   params: {
@@ -45,7 +48,7 @@ interface Destination {
     name: string;
     avatar: string;
     usename: string;
-    rating: string;
+    rating: number;
     content: string;
   }[];
 }
@@ -95,16 +98,31 @@ const pickupPointSelect = {
 };
 
 export default function DetailDestinasi(props: Props) {
-  const [pickupPointOptions, setPickupPointOptions] = useState([
-    {
-      value: "Indomart Point Mall Taman Anggrek",
-      label: "Indomart Point Mall Taman Anggrek",
-    },
-    {
-      value: "Indomart Point Mall Taman Anggrek S",
-      label: "Indomart Point Mall Taman Anggrek S",
-    },
-  ]);
+  const [destination, setDestination] = useState<Destination>({
+    id: 0,
+    name: "",
+    image: "",
+    province: "",
+    price: 0,
+    rating: 0,
+    package: "",
+    description: "",
+    travel_theme: "",
+    travel_type: "",
+    quota: 0,
+    terms_conditions: "",
+    date_departure: [],
+    departure_location: [],
+    trip_detail: [],
+    gallery: [],
+    review: [],
+  });
+
+  const [menu, setMenu] = useState<string>("trip_detail");
+  const [nav, setNav] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [dateDeparture, setDateDepature] = useState<Date>(new Date());
+  const [pickupPointOptions, setPickupPointOptions] = useState([]);
   const [selectedPickupPointOption, setSelectedPickupPointOption] =
     useState<SingleValue<{ value: string; label: string }>>(null);
 
@@ -114,14 +132,42 @@ export default function DetailDestinasi(props: Props) {
   const pathname = usePathname();
 
   const [centerLocation, setCenterLocation] = useState({
-    lat: -3.657799,
-    lng: 128.182373,
+    lat: 0,
+    lng: 0,
   });
   const [positionLocation, setPositionLocation] = useState({
-    lat: -3.657799,
-    lng: 128.182373,
+    lat: 0,
+    lng: 0,
   });
-  const [nav, setNav] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    getData(`/destination/${props.params.id}`)
+      .then((res) => {
+        setIsLoading(false);
+        setDestination(res);
+
+        const pickupPoint = res.departure_location.map(
+          (x: { name: string }) => ({
+            value: x.name,
+            label: x.name,
+          })
+        );
+        setPickupPointOptions(pickupPoint);
+
+        const location = res.departure_location.map(
+          (x: { location: string[] }) => ({
+            lat: Number(x.location[0]),
+            lng: Number(x.location[1]),
+          })
+        );
+        setCenterLocation(location[0]);
+        setPositionLocation(location[0]);
+        setDateDepature(new Date(res.date_departure[0]));
+      })
+      .then();
+  }, []);
 
   return (
     <main>
@@ -130,25 +176,31 @@ export default function DetailDestinasi(props: Props) {
           <div className="flex">
             <div className="flex-1 bg-dark-grey hidden xl:block">
               <Image
-                src={background_destinasi}
+                src={destination.image}
                 alt=""
-                className="w-full h-full object-center object-cover"
+                width={600}
+                height={980}
+                className="w-full max-w-[600px] max-h-[980px] h-full object-center object-cover"
               />
             </div>
             <div className="w-full max-w-[716px] xl:mr-[100px] xl:ml-10 mx-auto">
               <div className="pt-[60px]">
                 <div className="text-dark-pink border-b border-[#e0e0e0] pb-5 mb-10">
                   Destinasi <span className="text-[#a9a9a9]">/</span>{" "}
-                  <span>Jawa Timur</span>
+                  <span>{destination.province}</span>
                 </div>
                 <h1 className="text-3xl md:text-[45px] font-bold mb-[15px]">
-                  Gunung Bromo
+                  {destination.name}
                 </h1>
                 <p className="mb-10 text-base text-[#9f9f9f">
-                  Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku
+                  {destination.description}
                 </p>
                 <div className="bg-[#f1f1f1] text-lg flex-wrap py-3 flex justify-center gap-2 md:justify-between items-center px-[15px] mb-[30px]">
-                  <span>Saturday, 29 May 2021</span>
+                  <span>
+                    {Intl.DateTimeFormat("en-GB", {
+                      dateStyle: "full",
+                    }).format(dateDeparture)}
+                  </span>
                   <button className="flex text-dark-pink items-center gap-[6px] font-bold leading-none">
                     <Image src={icon_calendar} alt="" />
                     <span>Lihat Tanggal Lain</span>
@@ -162,7 +214,7 @@ export default function DetailDestinasi(props: Props) {
                     </span>
                   </div>
                   <Select
-                    defaultValue={pickupPointOptions[0]}
+                    defaultValue={selectedPickupPointOption}
                     onChange={(selectedPickupPointOption) =>
                       setSelectedPickupPointOption(selectedPickupPointOption)
                     }
@@ -196,7 +248,10 @@ export default function DetailDestinasi(props: Props) {
                   </p>
                   <p className="price text-[12px] text-medium md:mt-3">
                     <span className="text-dark-pink font-bold mr-1 text-lg">
-                      Rp. 1.200.000
+                      Rp.{" "}
+                      {destination.price
+                        .toString()
+                        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".")}
                     </span>{" "}
                     / Orang
                   </p>
@@ -205,7 +260,7 @@ export default function DetailDestinasi(props: Props) {
                   <div className="h-full w-[calc(100%*3/10)] bg-dark-pink rounded-full"></div>
                 </div>
                 <p className="text-base mb-[22px] font-medium">
-                  <span className="value_kuota">3</span> dari{" "}
+                  <span className="value_kuota">{destination.quota}</span> dari{" "}
                   <span className="max_kuota">10</span> kuota sudah terisi
                 </p>
                 <div className="flex gap-[10px] flex-wrap justify-center md:justify-normal">
@@ -296,162 +351,57 @@ export default function DetailDestinasi(props: Props) {
               } lg:opacity-100 lg:scale-100 lg:translate-x-0 lg:translate-y-0 transition-all flex flex-col lg:flex-row mb-4 absolute lg:static top-0 left-[60px] bg-white border gap-2 lg:gap-[50px] lg:border-0 p-3`}
             >
               <li>
-                <Link
-                  href="/destinasi/1"
+                <button
+                  onClick={() => setMenu("trip_detail")}
                   className={`${
-                    pathname === "/destinasi/1"
-                      ? "text-dark-pink"
-                      : "text-[#9f9f9f]"
+                    menu === "trip_detail" ? "text-dark-pink" : "text-[#9f9f9f]"
                   } transition text-base lg:text-2xl font-medium`}
                 >
                   Detail Perjalanan
-                </Link>
+                </button>
               </li>
               <li>
-                <Link
-                  href="/destinasi/1/syarat-dan-ketentuan"
+                <button
+                  onClick={() => setMenu("terms_conditions")}
                   className={`${
-                    pathname === "/destinasi/1/syarat-dan-ketentuan"
+                    menu === "terms_conditions"
                       ? "text-dark-pink"
                       : "text-[#9f9f9f]"
                   } transition text-base lg:text-2xl font-medium`}
                 >
                   Syarat & Ketentuan
-                </Link>
+                </button>
               </li>
               <li>
-                <Link
-                  href="/destinasi/1/galeri"
+                <button
+                  onClick={() => setMenu("gallery")}
                   className={`${
-                    pathname === "/destinasi/1/galeri"
-                      ? "text-dark-pink"
-                      : "text-[#9f9f9f]"
+                    menu === "gallery" ? "text-dark-pink" : "text-[#9f9f9f]"
                   } transition text-base lg:text-2xl font-medium`}
                 >
                   Galeri
-                </Link>
+                </button>
               </li>
               <li>
-                <Link
-                  href="/destinasi/1/ulasan"
+                <button
+                  onClick={() => setMenu("review")}
                   className={`${
-                    pathname === "/destinasi/1/ulasan"
-                      ? "text-dark-pink"
-                      : "text-[#9f9f9f]"
+                    menu === "review" ? "text-dark-pink" : "text-[#9f9f9f]"
                   } transition text-base lg:text-2xl font-medium`}
                 >
                   Ulasan
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
-          <article>
-            <div className="pt-[75px] flex flex-col gap-[75px]">
-              <div className="flex gap-x-[88px] gap-y-4 items-start flex-wrap md:flex-nowrap">
-                <div className="bg-dark-pink text-white flex flex-col font-medium pt-3 pb-1 px-[26px] text-center">
-                  <span className="text-2xl">Hari</span>
-                  <span className="text-[40px]">1</span>
-                </div>
-                <div className="flex gap-5 flex-col font-medium text-lg w-full">
-                  <div className="flex gap-x-6 lg:gap-x-[54px]">
-                    <span>20.30</span>
-                    <span className="w-full max-w-[735px]">
-                      Berkumpul di meeting point
-                    </span>
-                  </div>
-                  <div className="flex gap-x-6 lg:gap-x-[54px]">
-                    <span>21.00</span>
-                    <span className="w-full max-w-[735px]">
-                      Perjalanan menuju ke Batu
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex gap-x-[88px] gap-y-4 items-start flex-wrap md:flex-nowrap">
-                <div className="bg-dark-pink text-white flex flex-col font-medium pt-3 pb-1 px-[26px] text-center">
-                  <span className="text-2xl">Hari</span>
-                  <span className="text-[40px]">2</span>
-                </div>
-                <div className="flex gap-5 flex-col font-medium text-lg w-full">
-                  <div className="flex gap-x-6 lg:gap-x-[54px]">
-                    <span>12.00</span>
-                    <span className="w-full max-w-[735px]">
-                      Makan Siang di Lokal Restorant (Biaya Pribadi) di meeting
-                      point
-                    </span>
-                  </div>
-                  <div className="flex gap-x-6 lg:gap-x-[54px]">
-                    <span>13:00</span>
-                    <span className="w-full max-w-[735px]">
-                      Perjalanan menuju homestay
-                    </span>
-                  </div>
-                  <div className="flex gap-x-6 lg:gap-x-[54px]">
-                    <span>13:45</span>
-                    <span className="w-full max-w-[735px]">
-                      Tiba di Homestay untuk beristirahat & Free time (Waktu
-                      Bebas)
-                    </span>
-                  </div>
-                  <div className="flex gap-x-6 lg:gap-x-[54px]">
-                    <span>22:00</span>
-                    <span className="w-full max-w-[735px]">
-                      Persiapan perjalanan menuju Bromo
-                    </span>
-                  </div>
-                  <div className="flex gap-x-6 lg:gap-x-[54px]">
-                    <span>22:30</span>
-                    <span className="w-full max-w-[735px]">
-                      Perjalanan menuju bromo untuk melihat sunrise
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex gap-x-[88px] gap-y-4 items-start flex-wrap lg:flex-nowrap">
-                <div className="bg-dark-pink text-white flex flex-col font-medium pt-3 pb-1 px-[26px] text-center">
-                  <span className="text-2xl">Hari</span>
-                  <span className="text-[40px]">3</span>
-                </div>
-                <div className="flex gap-5 flex-col font-medium text-lg w-full">
-                  <div className="flex gap-x-6 lg:gap-x-[54px]">
-                    <span>03:00</span>
-                    <span className="w-full max-w-[735px]">
-                      Tiba di Cemoro Lawang, transfer Jeep menuju Pananjakan 1
-                      untuk melihat Sunrise di Bromo, dilanjutkan menuju ke
-                      Lautan Pasir, menuju ke Pura dan Kawah Bromo (dapat dengan
-                      berjalan kaki atau naik kuda dengan biaya pribadi), menuju
-                      ke Savana / Bukit Teletubbies dan Pasir Berbisik
-                    </span>
-                  </div>
-                  <div className="flex gap-x-6 lg:gap-x-[54px]">
-                    <span>09:00</span>
-                    <span className="w-full max-w-[735px]">
-                      Perjalanan kembali menuju homestay
-                    </span>
-                  </div>
-                  <div className="flex gap-x-6 lg:gap-x-[54px]">
-                    <span>13:45</span>
-                    <span className="w-full max-w-[735px]">
-                      Tiba di Homestay untuk beristirahat & Free time (Waktu
-                      Bebas)
-                    </span>
-                  </div>
-                  <div className="flex gap-x-6 lg:gap-x-[54px]">
-                    <span>22:00</span>
-                    <span className="w-full max-w-[735px]">
-                      Persiapan perjalanan menuju Bromo
-                    </span>
-                  </div>
-                  <div className="flex gap-x-6 lg:gap-x-[54px]">
-                    <span>22:30</span>
-                    <span className="w-full max-w-[735px]">
-                      Perjalanan menuju bromo untuk melihat sunrise
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
+          {menu === "trip_detail" && (
+            <TripDetail trip_detail={destination.trip_detail} />
+          )}
+          {menu === "terms_conditions" && (
+            <TermsConditions terms_conditions={destination.terms_conditions} />
+          )}
+          {menu === "gallery" && <Gallery gallery={destination.gallery} />}
+          {menu === "review" && <Review reviews={destination.review} />}
         </div>
       </section>
     </main>

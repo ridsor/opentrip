@@ -58,10 +58,11 @@ interface Sort {
 export async function POST(req: NextRequest) {
   const input: { filter: Filter; sort: Sort } = await req.json();
   let data: Destination[] = [];
-
+  
+  const search = req.nextUrl.searchParams.get("s") || "";
   data = await fetch(
     process.env.API_URL +
-      `/api/v1/destination?search=${input.filter.destination}`
+      `/api/v1/destination?search=${search}`
   )
     .then((res) => res.json())
     .catch(() => {
@@ -91,7 +92,6 @@ export async function POST(req: NextRequest) {
     
     return (x.trip_detail.length >= (min_duration) && x.trip_detail.length <= max_duration);
   });
-  console.log(data)
 
 
   const totalPage = Math.ceil(data.length / 9);
