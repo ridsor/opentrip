@@ -3,7 +3,7 @@
 import { useState } from "react";
 import DekstopHeader from "./DesktopHeader";
 import MobileHeader from "./MobileHeader";
-import DestinationSearch from "@/components/DestinationSearch/DestionationSearchHeader";
+import DestionationSearchHeader from "@/components/DestinationSearch/DestionationSearchHeader";
 import { usePathname } from "next/navigation";
 
 export default function Header() {
@@ -45,7 +45,7 @@ export default function Header() {
         } absolute w-full  py-6 min-h-[130px] h-fit bg-white z-50 transition-all ease-out`}
       >
         <div className="container h-full w-full">
-          <DestinationSearch />
+          <DestionationSearchHeader />
         </div>
       </div>
     </header>

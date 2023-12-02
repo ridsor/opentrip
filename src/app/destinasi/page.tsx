@@ -8,7 +8,6 @@ import Paginate from "./Paginate";
 import { useCallback, useEffect, useState } from "react";
 import Select, { components } from "react-select";
 import "./style.css";
-import { SingleValue } from "react-select/dist/declarations/src";
 import Script from "next/script";
 import { postData } from "@/services/destinastion";
 import { useSearchParams } from "next/navigation";
@@ -174,12 +173,7 @@ export default function Destinasi() {
     max_duration: "10",
   });
 
-  const [selectedSortOption, setSelectedSortOption] = useState<
-    SingleValue<{
-      value: { orderby: string; order: string };
-      label: string;
-    }>
-  >(null);
+  const [selectedSortOption, setSelectedSortOption] = useState(null);
   const [isFilter, setIsFilter] = useState<boolean>(false);
 
   const handleOnChangeFilter = useCallback(
@@ -219,7 +213,7 @@ export default function Destinasi() {
     const page = Number(searchParams.get("p")) || 1;
     const search = searchParams.get("s") || "";
 
-    postData(`/destination/filter?s=${search}`, {
+    postData(`/destination/filter?s=${search}&p=${page}`, {
       filter,
       sort: selectedSortOption,
     }).then((res) => {
@@ -243,7 +237,7 @@ export default function Destinasi() {
                 className="relative z-20 w-[130px] text-[12px]"
                 placeholder="Pilih Urutan"
                 defaultValue={selectedSortOption}
-                onChange={(selectedSortOption) =>
+                onChange={(selectedSortOption: any) =>
                   setSelectedSortOption(selectedSortOption)
                 }
                 options={sortOptions}

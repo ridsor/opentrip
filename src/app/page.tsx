@@ -50,6 +50,7 @@ export default async function Home() {
       >
         <div className="container h-full">
           <div className="flex h-full w-full mx-auto max-w-[calc(1440px-(205px+205px))] items-center relative">
+
             <h1 className="font-bold text-3xl lg:text-[45px] text-white leading-snug">
               NEVER STOP
               <br />
