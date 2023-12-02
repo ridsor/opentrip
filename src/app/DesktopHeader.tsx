@@ -3,37 +3,46 @@ import Image from "next/image";
 import brand from "@/app/assets/image/icon/brand.svg";
 
 interface Props {
+  pathname: string;
   isSearch: boolean;
   openCloseSearch: () => void;
 }
 
 export default function DekstopHeader(props: Props) {
   return (
-    <article
-      className="justify-between h-[72px] items-center hidden lg:flex"
-      id="dekstop">
+    <article className="justify-between h-[72px] items-center hidden lg:flex text-dark-grey">
       <div className="left">
         <ul className="flex gap-8">
           <li>
             <Link
               href="/"
-              className="font-medium border-b-4 py-0.5 block border-dark-pink">
+              className={`${
+                props.pathname === "/" ? "after:w-full" : "after:w-0"
+              } font-medium py-0.5 block relative after:block after:absolute after:top-full after:transition-all after:right-1/2 after:translate-x-1/2 after:h-[3px] after:bg-dark-pink`}
+            >
               Beranda
             </Link>
           </li>
           <li className="flex gap-5 items-center">
-            <Link href="/" className="font-medium leading-7 block">
+            <Link
+              href="/destinasi"
+              className={`${
+                props.pathname === "/destinasi" ? "after:w-full" : "after:w-0"
+              } font-medium py-0.5 block relative after:block after:absolute after:top-full after:transition-all after:right-1/2 after:translate-x-1/2 after:h-[3px] after:bg-dark-pink`}
+            >
               Destinasi
             </Link>
             <button
               className="w-[18px] h-[18px]"
-              onClick={() => props.openCloseSearch()}>
+              onClick={() => props.openCloseSearch()}
+            >
               <svg
                 width="18"
                 height="18"
                 viewBox="0 0 18 18"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <g id="akar-icons:search">
                   <g id="Group">
                     <path
@@ -51,18 +60,27 @@ export default function DekstopHeader(props: Props) {
         </ul>
       </div>
       <div className="center">
-        <Image src={brand} alt="brand" width={156.689} height={22} priority />
+        <Image
+          src={brand}
+          alt="brand"
+          width={156}
+          height={22}
+          priority
+          className="w-[156px] h-[22px]"
+        />
       </div>
       <div className="right">
         <div className="flex gap-[14px]">
           <Link
             href="/login"
-            className="font-bold text-dark-pink px-5 py-2 bg-[#f1e4ff] rounded-md">
+            className="font-bold text-dark-pink px-5 py-2 bg-[#f1e4ff] rounded-md"
+          >
             Login
           </Link>
           <Link
-            href="/signup"
-            className="font-bold text-white bg-dark-pink px-5 py-2 rounded-md">
+            href="/register"
+            className="font-bold text-white bg-dark-pink px-5 py-2 rounded-md"
+          >
             Sign up
           </Link>
         </div>

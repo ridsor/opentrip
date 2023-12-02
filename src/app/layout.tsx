@@ -8,7 +8,14 @@ import Header from "./header";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const enableHeaderFooter = ["/", "destinasi"];
+const enableHeaderFooter = [
+  "/",
+  "/destinasi",
+  "/destinasi/*",
+  "/register",
+  "/register/user",
+  "/register/hoster",
+];
 
 export default function RootLayout({
   children,
@@ -20,9 +27,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
-        {enableHeaderFooter.includes(pathname) && <Header />}
+        {(enableHeaderFooter.includes(pathname) ||
+          enableHeaderFooter.some(
+            (value) =>
+              value.includes("*") && pathname.startsWith(value.split("*")[0])
+          )) && <Header />}
         {children}
-        {enableHeaderFooter.includes(pathname) && <Footer />}
+        {(enableHeaderFooter.includes(pathname) ||
+          enableHeaderFooter.some(
+            (value) =>
+              value.includes("*") && pathname.startsWith(value.split("*")[0])
+          )) && <Footer />}
       </body>
     </html>
   );

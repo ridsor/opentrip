@@ -1,133 +1,151 @@
 import { Metadata } from "next";
 import background_hero from "./assets/image/background/asad-photo-maldives.png";
-import DestinationSearch from "@/components/DestionationSearch";
+import background_phone1 from "./assets/image/background/background_phone1.png";
+import background_phone2 from "./assets/image/background/background_phone2.png";
 import "./style.css";
-import Image from "next/image";
-
-import arrow from "@/app/assets/image/icon/bi_arrow-right.svg";
+import DestinationList from "./DestinationList";
 import Link from "next/link";
-import DestinationItem from "./DestinationItem";
+import icon_playstore from "@/app/assets/image/icon/Google Play Badge.svg";
+import icon_appstore from "@/app/assets/image/icon/App Store Badge.svg";
+import Image from "next/image";
+import DestinationSearchHome from "@/components/DestinationSearch/DestinationSearchHome";
+import { getData } from "@/services/destinastion";
 
 export const metadata: Metadata = {
   title: "Open Trip",
   description: "open trip",
 };
 
-export default function Home() {
+interface Destination {
+  id: number;
+  name: string;
+  image: string;
+  province: string;
+  price: number;
+  rating: number;
+  package: string;
+  description: string;
+  travel_theme: string;
+}
+
+export default async function Home() {
+  const popularDestinations: Destination[] = await getData(
+    "/destination?travel_theme=Destinasi Populer"
+  ).then((res) => res);
+  const vitaminSeaDestinations: Destination[] = await getData(
+    "/destination?travel_theme=Destinasi Populer"
+  ).then((res) => res);
+  const mountainDestinations: Destination[] = await getData(
+    "/destination?travel_theme=Naik Naik ke Puncak Gunung"
+  ).then((res) => res);
+  const natureDestinations: Destination[] = await getData(
+    "/destination?travel_theme=Menyatu Dengan Alam"
+  ).then((res) => res);
+
   return (
     <main>
       <section
         style={{ backgroundImage: `url(${background_hero.src})` }}
-        className="h-[449.369px] w-full bg-blend-multiply bg-[#c4c4c4] bg-cover bg-center">
+        className="h-[calc(449.369px+72px)] pt-[72px] w-full bg-blend-multiply bg-[#c4c4c4] bg-center bg-cover"
+      >
         <div className="container h-full">
-          <div className="flex items-center h-full w-full mx-auto max-w-[calc(1440px-(205px+205px))] relative">
+          <div className="flex h-full w-full mx-auto max-w-[calc(1440px-(205px+205px))] items-center relative">
+
             <h1 className="font-bold text-3xl lg:text-[45px] text-white leading-snug">
               NEVER STOP
               <br />
               EXPLORING THE WORLD
             </h1>
             <div className="absolute [box-shadow:0_4px_40px_0_rgba(0,0,0,0.1)] w-full lg:-bottom-[70px] bottom-[-200px] bg-white">
-              <DestinationSearch>
-                <div className="flex items-center h-full w-full flex-col lg:flex-row py-6 px-6 gap-5 lg:gap-0">
-                  <div className="form-input lg:ml-[calc(50px-24px)] lg:border-r lg:border-[#e3e3e3] lg:pr-6 w-full">
-                    <label
-                      htmlFor="tujuan"
-                      className="block mb-1 text-base font-medium">
-                      Tujuan
-                    </label>
-                    <input
-                      type="text"
-                      className="text-[#ccc] text-xl lg:text-[28px] placeholder:text-[#ccc] outline-none w-full lg:w-[calc(198px+140px-24px)]"
-                      placeholder="Semua Tujuan"
-                      id="tujuan"
-                      name="tujuan"
-                    />
-                  </div>
-                  <div className="lg:ml-[140px] form-input lg:mr-6 w-full">
-                    <label
-                      htmlFor="jadwal"
-                      className="block mb-1 text-base font-medium">
-                      Jadwal
-                    </label>
-                    <input
-                      type="text"
-                      className="text-[#ccc] text-xl lg:text-[28px] w-full placeholder:text-[#ccc] outline-none"
-                      placeholder="Kapan Saja"
-                      id="jadwal"
-                      name="jadwal"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="bg-dark-pink text-white py-4 lg:py-6 leading-none px-12 lg:px-20 text-xl">
-                    Cari
-                  </button>
-                </div>
-              </DestinationSearch>
+              <DestinationSearchHome />
             </div>
           </div>
         </div>
       </section>
       <section>
         <div className="container">
-          <div className="mt-[223px]">
-            <div className="populer-destination mb-[100.5px]">
-              <div className="flex justify-between items-center mb-10">
-                <h2 className="text-[35px] font-bold">Destinasi Populer</h2>
-                <Link
-                  href="/"
-                  className="font-medium text-lg text-dark-pink flex gap-[10px] items-center">
-                  <span className="leading-none">LIHAT LIBURAN LAINNYA </span>
-                  <Image
-                    src={arrow}
-                    width={20}
-                    height={20}
-                    alt="arrow"
-                    className="-translate-y-[1px]"
-                  />
-                </Link>
+          <div className="mt-[323px] lg:mt-[223px]">
+            <DestinationList
+              name="Destinasi Populer"
+              destinations={popularDestinations}
+              className="mb-[100px]"
+            />
+            <DestinationList
+              name="Vitamin Sea"
+              destinations={vitaminSeaDestinations}
+              className="mb-[100px]"
+            />
+            <DestinationList
+              name="Naik Naik ke Puncak Gunung"
+              destinations={mountainDestinations}
+              className="mb-[100px]"
+            />
+            <DestinationList
+              name="Menyatu Dengan Alam"
+              destinations={natureDestinations}
+              className="mb-[200px]"
+            />
+          </div>
+        </div>
+      </section>
+      <section className="bg-dark-pink text-white">
+        <div className="container w-full">
+          <div className="flex gap-7">
+            <div className="w-full h-full max-w-[540px] xl:mr-[138px]">
+              <div className="py-[100px]">
+                <h2 className="font-extrabold  text-3xl md:text-5xl mb-4">
+                  Download App
+                </h2>
+                <p className="text-lg mb-12 w-full">
+                  Download the app to manage your projects, keep track of the
+                  progress and complete tasks without procastinating. Stay on
+                  track and complete on time!
+                </p>
+                <h3 className="text-lg font-medium mb-2">Get the App</h3>
+                <div className="app flex gap-3">
+                  <Link href="/">
+                    <Image
+                      src={icon_playstore}
+                      width={135}
+                      height={40}
+                      alt=""
+                      className="w-[135px] h-[40px]"
+                    />
+                  </Link>
+                  <Link href="/">
+                    <Image
+                      src={icon_appstore}
+                      width={135}
+                      height={40}
+                      alt=""
+                      className="w-[135px] h-[40px]"
+                    />
+                  </Link>
+                </div>
               </div>
-              <div className="destionation-list">
-                <DestinationItem
-                  package="3D1N"
-                  place_name="Tanjung Benao"
-                  province="Bali"
-                  description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-                  price={2000000}
-                  rating={4.5}
-                />
-                <DestinationItem
-                  package="3D1N"
-                  place_name="Tanjung Benao"
-                  province="Bali"
-                  description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-                  price={2000000}
-                  rating={4.5}
-                />
-                <DestinationItem
-                  package="3D1N"
-                  place_name="Tanjung Benao"
-                  province="Bali"
-                  description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-                  price={2000000}
-                  rating={4.5}
-                />
-                <DestinationItem
-                  package="3D1N"
-                  place_name="Tanjung Benao"
-                  province="Bali"
-                  description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-                  price={2000000}
-                  rating={4.5}
-                />
-                <DestinationItem
-                  package="3D1N"
-                  place_name="Tanjung Benao"
-                  province="Bali"
-                  description="Minimum Keberangkatan 10 Orang, Syarat & Ketentuan Berlaku"
-                  price={2000000}
-                  rating={4.5}
-                />
+            </div>
+            <div className="w-full hidden lg:block">
+              <div className="relative h-full overflow-hidden">
+                <div className="absolute top-0 left-0">
+                  <Image
+                    src={background_phone1}
+                    alt=""
+                    width={232}
+                    height={464}
+                    priority
+                    className="max-w-none w-[232px] h-[464px]"
+                  />
+                </div>
+                <div className="absolute bottom-0 left-[calc(232px+32px)]">
+                  <Image
+                    src={background_phone2}
+                    alt=""
+                    width={232}
+                    height={464}
+                    priority
+                    className="w-[232px] h-[464px] max-w-none"
+                  />
+                </div>
               </div>
             </div>
           </div>

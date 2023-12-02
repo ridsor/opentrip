@@ -3,19 +3,28 @@ import Link from "next/link";
 import icon_brand from "@/app/assets/image/icon/brand.svg";
 import icon_playstore from "@/app/assets/image/icon/Google Play Badge.svg";
 import icon_appstore from "@/app/assets/image/icon/App Store Badge.svg";
+import icon_socialmedia1 from "@/app/assets/image/icon/Social Icons.svg";
+import icon_socialmedia2 from "@/app/assets/image/icon/Social Icons-1.svg";
+import icon_socialmedia3 from "@/app/assets/image/icon/Social Icons-2.svg";
+import { usePathname } from "next/navigation";
+
+const disableSocialMedia = ["/register", "/register/user"];
 
 export default function Footer() {
+  const pathname = usePathname();
+
   return (
-    <footer>
+    <footer className="bg-white">
       <div className="container">
         <div className="pt-[100px] pb-[133px] grid gap-[50px] text-[#333] lg:flex md:grid-cols-2">
           <div className="brand md:col-span-2 row-span-1 lg:col-auto lg:row-auto mr-[calc(99px-50px)]">
             <Image
               src={icon_brand}
               alt=""
-              width={216.011}
-              height={30.329}
+              width={216}
+              height={30}
               priority
+              className="w-[216px] h-[30px]"
             />
           </div>
           <div className="company whitespace-nowrap">
@@ -92,6 +101,7 @@ export default function Footer() {
                   alt="playstore"
                   width={135}
                   height={40}
+                  className="w-[135px] h-[40px]"
                 />
               </Link>
               <Link href="/">
@@ -100,12 +110,55 @@ export default function Footer() {
                   alt="appstore"
                   width={135}
                   height={40}
+                  className="w-[135px] h-[40px]"
                 />
               </Link>
             </div>
           </div>
         </div>
       </div>
+      {!disableSocialMedia.includes(pathname) && (
+        <div className="py-6 bg-[#0b0d17] text-white">
+          <div className="container flex justify-center md:justify-between flex-wrap gap-6">
+            <span>&copy; 2020 OPENTRIP. All rights reserved</span>
+            <ul className="social-media flex gap-4">
+              <li>
+                <Link href="">
+                  <Image
+                    src={icon_socialmedia1}
+                    alt=""
+                    width={24}
+                    height={24}
+                    priority
+                  />
+                </Link>
+              </li>
+              <li>
+                <Link href="">
+                  <Image
+                    src={icon_socialmedia2}
+                    alt=""
+                    width={24}
+                    height={24}
+                    priority
+                  />
+                </Link>
+              </li>
+              <li>
+                <Link href="">
+                  <Image
+                    src={icon_socialmedia3}
+                    alt=""
+                    width={24}
+                    height={24}
+                    priority
+                  />
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
     </footer>
   );
 }
