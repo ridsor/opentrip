@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,14 +12,21 @@ interface Input {
 }
 
 export default function DestinationSearch() {
+  const router = useRouter();
+
   const [inputs, setInputs] = useState<Input>({
     purpose: "",
     timetable: null,
   });
 
-  const handleSearch = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  }, []);
+  const handleSearch = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      router.push("/destinasi?s=" + inputs.purpose);
+    },
+    [inputs]
+  );
 
   return (
     <form method="POST" onSubmit={handleSearch}>
@@ -35,6 +43,9 @@ export default function DestinationSearch() {
               type="text"
               id="tujuan"
               name="tujuan"
+              onChange={(e) =>
+                setInputs((prev) => ({ ...prev, purpose: e.target.value }))
+              }
               className="text-[#ccc] text-xl placeholder:text-[#ccc] lg:text-[28px] outline-none block w-[198px]"
               placeholder="Semua Tempat"
             />

@@ -29,18 +29,18 @@ interface Destination {
 }
 
 export default async function Home() {
-  const popularDestinations = await getData<Destination[]>(
+  const popularDestinations: Destination[] = await getData(
     "/destination?travel_theme=Destinasi Populer"
-  );
-  const vitaminSeaDestinations = await getData<Destination[]>(
+  ).then((res) => res);
+  const vitaminSeaDestinations: Destination[] = await getData(
     "/destination?travel_theme=Destinasi Populer"
-  );
-  const mountainDestinations = await getData<Destination[]>(
+  ).then((res) => res);
+  const mountainDestinations: Destination[] = await getData(
     "/destination?travel_theme=Naik Naik ke Puncak Gunung"
-  );
-  const natureDestinations = await getData<Destination[]>(
+  ).then((res) => res);
+  const natureDestinations: Destination[] = await getData(
     "/destination?travel_theme=Menyatu Dengan Alam"
-  );
+  ).then((res) => res);
 
   return (
     <main>
@@ -112,7 +112,13 @@ export default async function Home() {
                     />
                   </Link>
                   <Link href="/">
-                    <Image src={icon_appstore} width={135} height={40} alt="" className="w-[135px] h-[40px]" />
+                    <Image
+                      src={icon_appstore}
+                      width={135}
+                      height={40}
+                      alt=""
+                      className="w-[135px] h-[40px]"
+                    />
                   </Link>
                 </div>
               </div>

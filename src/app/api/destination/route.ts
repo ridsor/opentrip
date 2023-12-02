@@ -38,6 +38,9 @@ export async function GET(req: NextRequest) {
   const p = searchParams.get("p") || "";
   const l = searchParams.get("l") || "";
   const travel_theme = searchParams.get("travel_theme") || "";
+
+  
+  try {
   data = await fetch(
     process.env.API_URL +
       `/api/v1/destination?p=${p}&l=${l}&travel_theme=${travel_theme}`
@@ -46,6 +49,18 @@ export async function GET(req: NextRequest) {
     .catch(() => {
       throw Error("Failed to fetch data");
     });
+  } catch (err) {
+    if(err) {
+      return NextResponse.json({
+        status: "fail",
+        message: err,
+      },{
+        status: 500
+      });
+    }
+  }
+
+  console.log(data)
 
   return NextResponse.json({
     status: "success",

@@ -1,23 +1,19 @@
-export const getData = async <T>(url: string): Promise<T> => {
-  const response = await fetch(process.env.BASE_URL + "/api" + url, {
-    next: {
-      revalidate: 10,
-    },
-  })
-    .then((res) => res.json())
-    .catch((err) => console.error(err));
+"use server"
+export const getData = async (url: string) => {
+  const response = await fetch(process.env.API_URL+"/api/v1" + url)
+  .then((res) => res.json())
+  .catch((err) => console.error(err));
 
-  return response.data;
+  return response;
 };
 
-export const postData = async <T>(url: string, input: Object): Promise<T> => {
-  const response = await fetch(process.env.BASE_URL + "/api" + url, {
-    next: {
-      revalidate: 10,
-    },
+export const postData = async (url: string, input: Object) => {
+  const response = await fetch(process.env.BASE_URL+"/api" + url,{
+    method: "POST",
+    body: JSON.stringify(input)
   })
-    .then((res) => res.json())
-    .catch((err) => console.error(err));
+  .then((res) => res.json())
+  .catch((err) => console.error(err));
 
-  return response.data;
+  return response;
 };

@@ -10,7 +10,10 @@ import Select, { components } from "react-select";
 import "./style.css";
 import { SingleValue } from "react-select/dist/declarations/src";
 import Script from "next/script";
-import { getData, postData } from "@/services/destinastion";
+import { postData } from "@/services/destinastion";
+import { useSearchParams } from "next/navigation";
+import Loading from "./Loading";
+import { useRouter } from "next/navigation";
 
 interface Destination {
   id: number;
@@ -31,15 +34,46 @@ interface Filter {
   travel_theme_vitaminsea_destination: boolean;
   travel_theme_mountain_destination: boolean;
   travel_theme_nature_destination: boolean;
-  min_price: number;
-  max_price: number;
+  min_price: string;
+  max_price: string;
   departure_location: string;
-  destination: string;
   date_departure?: Date;
   rating5: boolean;
   rating34: boolean;
-  min_duration: number;
-  max_duration: number;
+  min_duration: string;
+  max_duration: string;
+}
+
+interface Destination {
+  id: number;
+  name: string;
+  image: string;
+  province: string;
+  price: number;
+  rating: number;
+  package: string;
+  description: string;
+  travel_theme: string;
+  travel_type: string;
+  quota: number;
+  terms_conditions: string;
+  date_departure: string[];
+  departure_location: {
+    name: string;
+    location: string[];
+  }[];
+  trip_detail: {
+    hour: string;
+    description: string;
+  }[][];
+  gallery: string[];
+  review: {
+    name: string;
+    avatar: string;
+    usename: string;
+    rating: string;
+    content: string;
+  }[];
 }
 
 const sortOptions = [
@@ -106,8 +140,24 @@ const sortSelect = {
   }),
 };
 
+interface Paginate {
+  totalPage: number;
+  currentPage: number;
+  pageSize: number;
+}
+
 export default function Destinasi() {
-  const [destinations, setDestinations] = useState<Destination[]>();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const [isLoading, setLoading] = useState<boolean>(true);
+  const [destinations, setDestinations] = useState<Destination[]>([]);
+  const [delayFilter, setDelayFilter] = useState<NodeJS.Timeout>();
+  const [paginate, setPaginate] = useState<Paginate>({
+    totalPage: 1,
+    currentPage: 1,
+    pageSize: 9,
+  });
   const [filter, setFilter] = useState<Filter>({
     travel_type_open_trip: false,
     travel_type_private_trip: false,
@@ -115,14 +165,13 @@ export default function Destinasi() {
     travel_theme_vitaminsea_destination: false,
     travel_theme_mountain_destination: false,
     travel_theme_nature_destination: false,
-    min_price: 0,
-    max_price: 0,
+    min_price: "0",
+    max_price: "0",
     departure_location: "",
-    destination: "",
     rating5: false,
     rating34: false,
-    min_duration: 1,
-    max_duration: 10,
+    min_duration: "1",
+    max_duration: "10",
   });
 
   const [selectedSortOption, setSelectedSortOption] = useState<
@@ -135,26 +184,50 @@ export default function Destinasi() {
 
   const handleOnChangeFilter = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFilter((prev) => ({
-        ...prev,
-        [e.target.name]:
-          e.target.type == "checkbox" ? e.target.checked : e.target.value,
-      }));
+      clearTimeout(delayFilter);
+
+      setDelayFilter(
+        setTimeout(() => {
+          setFilter((prev) => ({
+            ...prev,
+            [e.target.name]:
+              e.target.type == "checkbox" ? e.target.checked : e.target.value,
+          }));
+        }, 500)
+      );
     },
     []
   );
   const handleChangeDate = useCallback((date: Date) => {
     setFilter((prev) => ({ ...prev, tanggal_keberangkatan: date }));
   }, []);
+  const handleChangeSearch = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      clearTimeout(delayFilter);
+
+      setDelayFilter(
+        setTimeout(() => {
+          router.push("/destinasi?s=" + e.target.value);
+        }, 500)
+      );
+    },
+    [delayFilter]
+  );
 
   useEffect(() => {
-    postData<Destination[]>("/destination?p=1&l=9", {
+    setLoading(true);
+    const page = Number(searchParams.get("p")) || 1;
+    const search = searchParams.get("s") || "";
+
+    postData(`/destination/filter?s=${search}`, {
       filter,
       sort: selectedSortOption,
-    }).then((data) => {
-      setDestinations(data);
+    }).then((res) => {
+      setDestinations(res.data);
+      setPaginate(res.paginate);
+      setLoading(false);
     });
-  }, [filter]);
+  }, [filter, searchParams]);
 
   return (
     <main>
@@ -197,11 +270,18 @@ export default function Destinasi() {
                 filter={filter}
                 onChangeFilter={handleOnChangeFilter}
                 onChangeDate={handleChangeDate}
+                onChangeSearch={handleChangeSearch}
               />
             </div>
             <div className="flex-1">
-              <DestinationList destinations={destinations} />
-              <Paginate />
+              {!isLoading ? (
+                <>
+                  <DestinationList destinations={destinations} />
+                  <Paginate paginate={paginate} />
+                </>
+              ) : (
+                <Loading />
+              )}
             </div>
           </div>
         </div>

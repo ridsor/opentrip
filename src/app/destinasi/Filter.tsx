@@ -12,18 +12,18 @@ interface Props {
     travel_theme_vitaminsea_destination: boolean;
     travel_theme_mountain_destination: boolean;
     travel_theme_nature_destination: boolean;
-    min_price: number;
-    max_price: number;
+    min_price: string;
+    max_price: string;
     departure_location: string;
-    destination: string;
     date_departure?: Date;
     rating5: boolean;
     rating34: boolean;
-    min_duration: number;
-    max_duration: number;
+    min_duration: string;
+    max_duration: string;
   };
   onChangeFilter: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDate: (date: Date) => void;
+  onChangeSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function Filter(props: Props) {
@@ -173,8 +173,9 @@ export default function Filter(props: Props) {
                   Rp
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   id="min_price"
+                  min={0}
                   name="min_price"
                   onChange={props.onChangeFilter}
                   value={props.filter.min_price}
@@ -190,9 +191,10 @@ export default function Filter(props: Props) {
                   Rp
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   id="max_price"
                   name="max_price"
+                  min={0}
                   value={props.filter.max_price}
                   onChange={props.onChangeFilter}
                   className="w-full placeholder:text-[#bcbcbc] h-full px-[10px] tracking-[0.2px] placeholder:tracking-[0.2px] outline-none"
@@ -305,8 +307,7 @@ export default function Filter(props: Props) {
                   name="destination"
                   className="w-full placeholder:text-[#bcbcbc] h-full px-[10px] tracking-[0.2px] placeholder:tracking-[0.2px] outline-none"
                   placeholder="Cari destinasi"
-                  value={props.filter.destination}
-                  onChange={props.onChangeFilter}
+                  onChange={props.onChangeSearch}
                 />
               </div>
             </div>
