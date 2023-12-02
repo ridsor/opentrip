@@ -12,6 +12,7 @@ interface Props {
 }
 
 export default function Paginate({ paginate }: Props) {
+  console.log(paginate);
   return (
     <div className="paginate flex md:justify-end text-[#878787] font-medium gap-[23px] flex-wrap justify-center">
       <div className="flex gap-5 flex-wrap justify-center">
