@@ -12,6 +12,7 @@ import { SingleValue } from "react-select/dist/declarations/src";
 import Script from "next/script";
 import { getData, postData } from "@/services/destinastion";
 import { useSearchParams } from "next/navigation";
+import Loading from "./Loading";
 
 interface Destination {
   id: number;
@@ -148,6 +149,7 @@ interface Paginate {
 export default function Destinasi() {
   const searchParams = useSearchParams();
 
+  const [isLoading, setLoading] = useState<boolean>(true);
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [paginate, setPaginate] = useState<Paginate>({
     totalPage: 1,
@@ -194,6 +196,7 @@ export default function Destinasi() {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     const page = Number(searchParams.get("p")) || 1;
 
     postData(`/destination/filter?p=${page}`, {
@@ -202,6 +205,7 @@ export default function Destinasi() {
     }).then((res) => {
       setDestinations(res.data);
       setPaginate(res.paginate);
+      setLoading(false);
     });
   }, [filter, searchParams]);
 
@@ -249,8 +253,14 @@ export default function Destinasi() {
               />
             </div>
             <div className="flex-1">
-              <DestinationList destinations={destinations} />
-              <Paginate paginate={paginate} />
+              {!isLoading ? (
+                <>
+                  <DestinationList destinations={destinations} />
+                  <Paginate paginate={paginate} />
+                </>
+              ) : (
+                <Loading />
+              )}
             </div>
           </div>
         </div>
