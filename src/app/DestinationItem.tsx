@@ -1,51 +1,44 @@
 import Image from "next/image";
 import star from "@/app/assets/image/icon/star.svg";
 import Link from "next/link";
+import { Destination } from "@/types/destination.type";
+import { formatPrice, getDayNight } from "@/lib/utils";
 
 interface Props {
-  id: number;
-  image: string;
-  place_name: string;
-  province: string;
-  package: string;
-  description: string;
-  price: number;
-  rating: number;
+  destination: Destination;
 }
 
 export default function DestinationItem(props: Props) {
   return (
     <div className="destionation-item flex flex-col w-full max-w-[295px]">
-      <Link href={`/destinasi/${props.id}`} className="relative">
+      <Link href={`/destinasi/${props.destination.id}`} className="relative">
         <Image
-          src={props.image}
-          alt={props.place_name}
+          src={props.destination.imageUrl}
+          alt={"Destination Background"}
           width={295}
           height={295}
           className="bg-[#C4C4C4] object-cover object-center w-full aspect-square h-auto"
         />
         <div className="absolute text-base font-semibold text-white px-[15px] py-[5px] bottom-0 right-0 bg-[#1d1d1d]">
-          <span>{props.package}</span>
+          <span>
+            {getDayNight(props.destination.day, props.destination.night)}
+          </span>
         </div>
       </Link>
       <div className="content py-6 px-5 flex-1 grid">
         <div>
           <Link
-            href={`/destinasi/${props.id}`}
-            className="title font-bold text-[22px] mb-5 block"
-          >
-            {props.place_name}, {props.province}
+            href={`/destinasi/${props.destination.id}`}
+            className="title font-bold text-[22px] mb-5 block">
+            {props.destination.title}
           </Link>
           <div className="description text-sm font-medium mb-5">
-            <span>{props.description}</span>
+            <span>{props.destination.description}</span>
           </div>
           <div className="flex justify-between mb-5">
             <div className="price flex items-center gap-1">
               <span className="text-lg font-bold text-dark-pink">
-                Rp{" "}
-                {props.price
-                  .toString()
-                  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".")}
+                {formatPrice(props.destination.price)}
               </span>
               <span className="text-[12px] font-medium"> / Orang</span>
             </div>
@@ -57,15 +50,17 @@ export default function DestinationItem(props: Props) {
                 height={20}
                 className="w-5 h-5"
               />
-              <span className="text-[12px] font-bold"> {props.rating / 2}</span>
+              <span className="text-[12px] font-bold">
+                {" "}
+                {props.destination.rating}
+              </span>
             </div>
           </div>
         </div>
         <div className="order self-end">
           <Link
             href="/"
-            className="text-base font-semibold text-white bg-dark-pink py-[15.5px] text-center block"
-          >
+            className="text-base font-semibold text-white bg-dark-pink py-[15.5px] text-center block">
             Pesan Sekarang
           </Link>
         </div>

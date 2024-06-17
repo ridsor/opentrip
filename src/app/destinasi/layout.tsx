@@ -1,10 +1,22 @@
-import { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Open Trip - Destinasi",
-  description: "open trip",
-};
+import { createContext, useState } from "react";
+
+export const DestinationContext = createContext<{
+  filter: boolean;
+  toggleFilter: () => void;
+} | null>(null);
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  const [filter, setFilter] = useState<boolean>(false);
+
+  const toggleFilter = () => {
+    setFilter((prev) => !prev);
+  };
+
+  return (
+    <DestinationContext.Provider value={{ filter, toggleFilter }}>
+      {children}
+    </DestinationContext.Provider>
+  );
 }

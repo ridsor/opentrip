@@ -9,48 +9,31 @@ import icon_playstore from "@/app/assets/image/icon/Google Play Badge.svg";
 import icon_appstore from "@/app/assets/image/icon/App Store Badge.svg";
 import Image from "next/image";
 import DestinationSearchHome from "@/components/DestinationSearch/DestinationSearchHome";
-import { getData } from "@/services/destinastion";
+import { Destination } from "@/types/destination.type";
+import { getDestinastionByCategory } from "@/services/destination.service";
 
 export const metadata: Metadata = {
   title: "Open Trip",
   description: "open trip",
 };
 
-interface Destination {
-  id: number;
-  name: string;
-  image: string;
-  province: string;
-  price: number;
-  rating: number;
-  package: string;
-  description: string;
-  travel_theme: string;
-}
-
 export default async function Home() {
-  const popularDestinations: Destination[] = await getData(
-    "/destination?travel_theme=Destinasi Populer"
-  ).then((res) => res);
-  const vitaminSeaDestinations: Destination[] = await getData(
-    "/destination?travel_theme=Destinasi Populer"
-  ).then((res) => res);
-  const mountainDestinations: Destination[] = await getData(
-    "/destination?travel_theme=Naik Naik ke Puncak Gunung"
-  ).then((res) => res);
-  const natureDestinations: Destination[] = await getData(
-    "/destination?travel_theme=Menyatu Dengan Alam"
-  ).then((res) => res);
+  const popularDestinations: Destination[] =
+    (await getDestinastionByCategory("popular")) || [];
+  const vitaminSeaDestinations: Destination[] =
+    (await getDestinastionByCategory("sea")) || [];
+  const mountainDestinations: Destination[] =
+    (await getDestinastionByCategory("mountain")) || [];
+  const natureDestinations: Destination[] =
+    (await getDestinastionByCategory("nature")) || [];
 
   return (
     <main>
       <section
         style={{ backgroundImage: `url(${background_hero.src})` }}
-        className="h-[calc(449.369px+72px)] pt-[72px] w-full bg-blend-multiply bg-[#c4c4c4] bg-center bg-cover"
-      >
+        className="h-[calc(449.369px+72px)] pt-[72px] w-full bg-blend-multiply bg-[#c4c4c4] bg-center bg-cover">
         <div className="container h-full">
           <div className="flex h-full w-full mx-auto max-w-[calc(1440px-(205px+205px))] items-center relative">
-
             <h1 className="font-bold text-3xl lg:text-[45px] text-white leading-snug">
               NEVER STOP
               <br />

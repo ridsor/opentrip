@@ -2,18 +2,7 @@ import Image from "next/image";
 import DestinationItem from "./DestinationItem";
 import Link from "next/link";
 import arrow from "@/app/assets/image/icon/bi_arrow-right.svg";
-
-interface Destination {
-  id: number;
-  name: string;
-  image: string;
-  province: string;
-  price: number;
-  rating: number;
-  package: string;
-  description: string;
-  travel_theme: string;
-}
+import { Destination } from "@/types/destination.type";
 
 interface Props {
   destinations: Destination[];
@@ -28,8 +17,7 @@ export default function DestinationList(props: Props) {
         <h2 className="text-3xl md:text-[35px] font-bold">{props.name}</h2>
         <Link
           href="/"
-          className="font-medium text-lg text-dark-pink flex gap-[10px] items-center"
-        >
+          className="font-medium text-lg text-dark-pink flex gap-[10px] items-center">
           <span className="leading-none">LIHAT LIBURAN LAINNYA </span>
           <Image
             src={arrow}
@@ -43,17 +31,7 @@ export default function DestinationList(props: Props) {
       <div className="destionation-wrapper relative">
         <div className="destionation-list">
           {props.destinations.map((destination) => (
-            <DestinationItem
-              key={destination.id}
-              id={destination.id}
-              image={destination.image}
-              package={destination.package}
-              place_name={destination.name}
-              province={destination.province}
-              description={destination.description}
-              price={destination.price}
-              rating={destination.rating}
-            />
+            <DestinationItem key={destination.id} destination={destination} />
           ))}
         </div>
       </div>

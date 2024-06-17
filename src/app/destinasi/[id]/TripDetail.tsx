@@ -12,8 +12,7 @@ export default function TripDetail({ trip_detail }: Props) {
         {trip_detail.map((x, i) => (
           <div
             key={i}
-            className="flex gap-x-[88px] gap-y-4 items-start flex-wrap md:flex-nowrap"
-          >
+            className="flex gap-x-[88px] gap-y-4 items-start flex-wrap md:flex-nowrap">
             <div className="bg-dark-pink text-white flex flex-col font-medium pt-3 pb-1 px-[26px] text-center">
               <span className="text-2xl">Hari</span>
               <span className="text-[40px]">{++i}</span>
@@ -25,12 +24,6 @@ export default function TripDetail({ trip_detail }: Props) {
                   <span className="w-full max-w-[735px]">{k.description}</span>
                 </div>
               ))}
-              <div className="flex gap-x-6 lg:gap-x-[54px]">
-                <span>21.00</span>
-                <span className="w-full max-w-[735px]">
-                  Perjalanan menuju ke Batu
-                </span>
-              </div>
             </div>
           </div>
         ))}

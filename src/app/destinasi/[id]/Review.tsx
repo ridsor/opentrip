@@ -5,7 +5,7 @@ interface Props {
 interface Review {
   name: string;
   avatar: string;
-  usename: string;
+  username: string;
   rating: number;
   content: string;
 }
@@ -32,7 +32,7 @@ export default function Review({ reviews }: Props) {
                   <div>
                     <h3 className="text-xl font-bold">{review.name}</h3>
                     <p className="text-[12px] font-light leading-none mb-3">
-                      {review.usename}
+                      {review.username}
                     </p>
                     <div className="flex items-center">
                       <div className="rating flex items-center">

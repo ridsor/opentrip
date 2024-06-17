@@ -1,12 +1,22 @@
 .destionation-list::-webkit-scrollbar {
-  height: 5px;
+  height: 8px;
   background-color: #c4c4c4;
+  width: 20px;
   @apply rounded-full;
 }
+
+.destionation-list::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+.destionation-list::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
+
 .destionation-list::-webkit-scrollbar-thumb {
   position: absolute;
   @apply bg-dark-pink rounded-full;
-  height: 20px;
 }
 
 .destionation-list {
@@ -14,21 +24,8 @@
   overflow-x: auto;
   overflow-y: hidden;
   position: relative;
-  scrollbar-color: #ff385c rgb(255, 100, 100);
-  scrollbar-width: thin;
-  -ms-overflow-style: none;
   display: flex;
   column-gap: 20px;
-}
-
-.destionation-wrapper::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
   box-shadow: 0px 10px 60px 0px rgba(46, 46, 46, 0.15);
 }
 
