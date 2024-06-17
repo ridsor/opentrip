@@ -19,14 +19,11 @@ export default function DestinationSearch() {
     timetable: null,
   });
 
-  const handleSearch = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-      router.push("/destinasi?s=" + inputs.purpose);
-    },
-    [inputs]
-  );
+    router.push("/destinasi?s=" + inputs.purpose);
+  };
 
   return (
     <form method="POST" onSubmit={handleSearch}>
@@ -35,8 +32,7 @@ export default function DestinationSearch() {
           <div className="form-input">
             <label
               htmlFor="tujuan"
-              className="text-base font-medium mb-1 block"
-            >
+              className="text-base font-medium mb-1 block">
               Tujuan
             </label>
             <input
@@ -54,8 +50,7 @@ export default function DestinationSearch() {
           <div className="form-input">
             <label
               htmlFor="jadwal"
-              className="text-base font-medium mb-1 block"
-            >
+              className="text-base font-medium mb-1 block">
               Jadwal
             </label>
             <ReactDatePicker
@@ -72,8 +67,7 @@ export default function DestinationSearch() {
         </div>
         <button
           type="submit"
-          className="bg-dark-pink text-white py-4 lg:py-6 leading-none px-12 lg:px-20 text-xl"
-        >
+          className="bg-dark-pink text-white py-4 lg:py-6 leading-none px-12 lg:px-20 text-xl">
           Cari
         </button>
       </div>

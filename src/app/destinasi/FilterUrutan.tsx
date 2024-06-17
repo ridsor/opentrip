@@ -4,7 +4,7 @@ import icon_filter from "@/app/assets/image/icon/fluent_filter.svg";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import Select, { components } from "react-select";
-import { DestinationContext } from "./layout";
+import DestinationContext from "./DestinationContext";
 
 const sortOptions = [
   { value: { orderby: "asc", order: "name" }, label: "A-Z" },

@@ -7,7 +7,7 @@ import Image from "next/image";
 import ReactDatePicker from "react-datepicker";
 import { useCallback, useContext, useState } from "react";
 import { useRouter } from "next/navigation";
-import { DestinationContext } from "./layout";
+import DestinationContext from "./DestinationContext";
 
 interface Filter {
   travel_type_open_trip: boolean;

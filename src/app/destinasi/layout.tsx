@@ -1,11 +1,7 @@
 "use client";
 
-import { createContext, useState } from "react";
-
-export const DestinationContext = createContext<{
-  filter: boolean;
-  toggleFilter: () => void;
-} | null>(null);
+import { useState } from "react";
+import DestinationContext from "./DestinationContext";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [filter, setFilter] = useState<boolean>(false);
